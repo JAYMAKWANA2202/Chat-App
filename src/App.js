@@ -5,7 +5,9 @@ import Router from "./Utilities/Router";
 function App() {
   return (
     <div className="App">
-      <div className="herder-part">this is the navbar</div>
+      <div className="herder-part">
+        <Navbar />
+      </div>
       <div className="main-content">
         <Router />
       </div>
