@@ -24,11 +24,15 @@ const NavLink = styled(Link)`
   margin-right: 20px;
   text-decoration: none;
   &:hover {
-    color: #666;
+    color: black;
+    font-size: bold;
   }
 `;
 
-const Form = styled.button``;
+const Button = styled.button`
+  width: 50px;
+  height: 23px;
+`;
 
 const Navbar = () => {
   return (
@@ -36,10 +40,9 @@ const Navbar = () => {
       <NavLinks>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/about">About</NavLink>
+        <NavLink to="/contact us">Contact Us</NavLink>
       </NavLinks>
-      <Form>
-        <button>login</button> <button>Signup</button>
-      </Form>
+      <Button>Login</Button>
     </NavbarContainer>
   );
 };
