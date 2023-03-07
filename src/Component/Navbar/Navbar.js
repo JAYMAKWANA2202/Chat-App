@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const NavbarContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: #00a884;
   padding: 20px;
@@ -42,7 +42,7 @@ const Navbar = () => {
         <NavLink to="/about">About</NavLink>
         <NavLink to="/contact us">Contact Us</NavLink>
       </NavLinks>
-      <Button>Login</Button>
+      {/* <Button>Login</Button> */}
     </NavbarContainer>
   );
 };
