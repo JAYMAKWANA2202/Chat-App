@@ -16,9 +16,10 @@ const Center = styled.h1`
   color: grey;
   background-color: #ffffff;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 8px;
   margin: 0 10%;
-  border: 3px solid red;
+  position: relative;
+  top: -50px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 `;
