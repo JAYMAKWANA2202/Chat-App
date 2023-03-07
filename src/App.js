@@ -22,8 +22,7 @@ const MainContainer = styled.div`
 `;
 
 const FooterContainer = styled.div`
-  height: 50px;
-  bottom: 0;
+  height: 42px;
 `;
 
 function App() {

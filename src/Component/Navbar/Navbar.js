@@ -40,9 +40,7 @@ const Navbar = () => {
       <NavLinks>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/about">About</NavLink>
-        <NavLink to="/contact us">Contact Us</NavLink>
       </NavLinks>
-      {/* <Button>Login</Button> */}
     </NavbarContainer>
   );
 };
