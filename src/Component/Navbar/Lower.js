@@ -14,8 +14,13 @@ const Containers = styled.div`
 const Center = styled.h1`
   text-align: center;
   color: grey;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 15px;
+  border-radius: 10px;
+  margin: 0 10%;
+  border: 3px solid red;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 `;
 
 const FormContainer = styled(Form)`
@@ -23,6 +28,7 @@ const FormContainer = styled(Form)`
   justify-content: space-between;
   height: 400px;
   width: 100%;
+
   margin-top: 15px;
 `;
 

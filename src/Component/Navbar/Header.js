@@ -26,6 +26,7 @@ const New = styled.div`
 
 const Logo = styled.span`
   margin: 30px 10px 0 0;
+  margin-left: 10%;
 `;
 export default function Header() {
   return (
