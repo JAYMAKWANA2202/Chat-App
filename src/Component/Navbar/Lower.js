@@ -8,22 +8,22 @@ const Containers = styled.div`
   color: white;
   font-size: 25px;
   justify-content: center;
-  height: 1000px;
-  padding: 64px 60px 60px;
+  height: 600px;
 `;
 
 const Center = styled.h1`
   text-align: center;
   color: grey;
   background-color: #fff;
+  padding: 15px;
 `;
 
 const FormContainer = styled(Form)`
   display: flex;
   justify-content: space-between;
-  border: 2px solid white;
-  height: 500px;
+  height: 400px;
   width: 100%;
+  margin-top: 15px;
 `;
 
 const Left = styled.div`
