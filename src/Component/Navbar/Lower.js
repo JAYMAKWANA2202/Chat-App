@@ -18,11 +18,16 @@ const Center = styled.h1`
   background-color: #ffffff;
   padding: 15px;
   border-radius: 3px;
-  margin: 0 153px;
+  margin: 0 152px;
   position: relative;
   top: -129px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+  @media screen and (max-width: 1024px) {
+    margin: 0;
+    top: -60px;
+  }
 `;
 
 const FormContainer = styled(Form)`
@@ -32,6 +37,12 @@ const FormContainer = styled(Form)`
   width: 100%;
   margin-top: 15px;
   padding: 34px 34px 34px;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    height: auto;
+    padding: 15px;
+  }
 `;
 
 const Left = styled.div`
@@ -44,6 +55,12 @@ const Left = styled.div`
     line-height: normal;
     color: #41525d;
     margin-right: 30px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: center;
   }
 `;
 
