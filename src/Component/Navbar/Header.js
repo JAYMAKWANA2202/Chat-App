@@ -7,13 +7,13 @@ import { Whatsapp } from "react-bootstrap-icons";
 
 const Headerpart = styled.div`
   background-color: #00a884;
-  height: 150px;
+  height: 223px;
 `;
 
 const Navbar_Brand = styled.div`
-  margin: 25px 0 0 0;
+  margin: 12px 0 0 0;
   color: white;
-  font-size: 35px;
+  font-size: 25px;
 `;
 
 const New = styled.div`
@@ -21,11 +21,13 @@ const New = styled.div`
   flex: none;
   align-items: center;
   justify-content: flex-start;
-  width: 100%;
+  width: 1000px;
+  min-height: 39px;
+  margin: 0 54px;
 `;
 
 const Logo = styled.span`
-  margin: 30px 10px 0 0;
+  margin: 18px 8px 0 0;
   margin-left: 10%;
 `;
 export default function Header() {
@@ -37,7 +39,7 @@ export default function Header() {
             <New>
               <Logo>
                 <span>
-                  <Whatsapp size={40} color="white" />
+                  <Whatsapp size={39} color="white" />
                 </span>
               </Logo>
               <Navbar_Brand>Chat-App</Navbar_Brand>
