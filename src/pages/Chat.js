@@ -1,5 +1,10 @@
 import React from "react";
+import Sidbar from "../Component/Sidbar";
 
 export default function Chat() {
-  return <div>this is the chat </div>;
+  return (
+    <div>
+      <Sidbar />
+    </div>
+  );
 }
