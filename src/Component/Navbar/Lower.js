@@ -10,7 +10,7 @@ const Containers = styled.div`
   color: white;
   font-size: 25px;
   justify-content: center;
-  height: 500px;
+  height: 495px;
 `;
 
 const Center = styled.h1`
@@ -90,7 +90,7 @@ const Right = styled.div`
 `;
 
 const Code = styled.div`
-  margin-left: 82px;
+  /* margin-left: 82px; */
 `;
 
 export default function Lower() {
@@ -119,7 +119,7 @@ export default function Lower() {
               </Left>
               <Right>
                 <Code>
-                  <QRCode value="whats app" />
+                  <QRCode value="whatsapp" />
                 </Code>
               </Right>
             </FormContainer>

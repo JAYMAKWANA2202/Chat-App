@@ -1,6 +1,5 @@
 ::-webkit-scrollbar {
-  height: 100%;
-  /* overflow: hidden; */
+  overflow-y: auto;
   width: 0.3rem;
 }
 
