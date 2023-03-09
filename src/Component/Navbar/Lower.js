@@ -3,13 +3,14 @@ import styled from "styled-components";
 import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
 import { Gear, ThreeDotsVertical } from "react-bootstrap-icons";
+import QRCode from "react-qr-code";
 
 const Containers = styled.div`
   background-color: #111b21;
   color: white;
   font-size: 25px;
   justify-content: center;
-  height: 490px;
+  height: 500px;
 `;
 
 const Center = styled.h1`
@@ -33,7 +34,7 @@ const Center = styled.h1`
 const FormContainer = styled(Form)`
   display: flex;
   justify-content: space-between;
-  height: 444px;
+  height: 450px;
   width: 100%;
   margin-top: 15px;
   padding: 34px 34px 34px;
@@ -80,6 +81,16 @@ const List = styled.ul`
 const Right = styled.div`
   font-size: 20px;
   width: 50%;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+`;
+
+const Code = styled.div`
+  margin-left: 82px;
 `;
 
 export default function Lower() {
@@ -106,7 +117,11 @@ export default function Lower() {
                   </ol>
                 </List>
               </Left>
-              <Right></Right>
+              <Right>
+                <Code>
+                  <QRCode value="whats app" />
+                </Code>
+              </Right>
             </FormContainer>
           </Center>
         </Container>
