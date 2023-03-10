@@ -56,18 +56,20 @@ const Header = styled.div`
   align-items: center;
   padding: 15px;
   height: 80px;
-  border-bottom: 1px solid whitesmoke;
+  /* border-bottom: 1px solid whitesmoke; */
 `;
 
 const IconButton = styled.div`
   cursor: pointer;
   color: #aebac1;
+  font-size: 25px;
 `;
 
 const UserAvatar = styled(FaRegUserCircle)`
   margin: 10px;
   cursor: pointer;
   color: #aebac1;
+  font-size: 31px;
 `;
 
 const IconContainer = styled.div``;
