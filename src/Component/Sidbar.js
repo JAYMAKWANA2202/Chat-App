@@ -9,12 +9,11 @@ export default function Sidbar() {
     <Container>
       <Header>
         <UserAvatar />
-        <IconContainer>
-          <IconButton>
-            <BsChatLeftTextFill />
-            <CiMenuKebab />
-          </IconButton>
-        </IconContainer>
+
+        <IconButton>
+          <BsChatLeftTextFill style={{ marginRight: "10px" }} />
+          <CiMenuKebab style={{ marginBottom: "5px" }} />
+        </IconButton>
       </Header>
 
       <Search>
@@ -24,19 +23,22 @@ export default function Sidbar() {
         <SearchInput placeholder="search chat" />
       </Search>
 
+      <UserChat>hsdshhcschcw</UserChat>
+
       {/* List of chats */}
     </Container>
   );
 }
 
 const Container = styled.div`
+  /* border: 1px solid white; */
   width: 25%;
 `;
 const Search = styled.div`
   display: flex;
   align-items: center;
   padding: 17px;
-  /* border-radius: 2px; */
+
   background-color: #111b21;
 `;
 
@@ -54,6 +56,7 @@ const SearchInput = styled.input`
 const SearchButton = styled.div`
   cursor: pointer;
   margin-left: -5px;
+  margin-bottom: 4px;
 `;
 
 const Header = styled.div`
@@ -82,4 +85,8 @@ const UserAvatar = styled(FaRegUserCircle)`
   font-size: 31px;
 `;
 
-const IconContainer = styled.div``;
+const UserChat = styled.div`
+  background-color: #111b21;
+  color: white;
+  height: 547px;
+`;
