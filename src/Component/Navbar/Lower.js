@@ -4,6 +4,67 @@ import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
 import { Gear, ThreeDotsVertical } from "react-bootstrap-icons";
 import QRCode from "react-qr-code";
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { app } from "../../utilities/firebase";
+
+export default function Lower() {
+  const navigate = useNavigate();
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  const handleGoogleSignIn = async () => {
+    signInWithPopup(auth, provider)
+      .then(async (res) => {
+        console.log("res: ", res);
+        if (auth.currentUser) {
+          navigate("/chat");
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
+  return (
+    <>
+      <Containers>
+        <Container>
+          <Center>
+            <FormContainer>
+              <Left>
+                <h3>Use WhatsApp on your computer</h3>
+                <List>
+                  <ol>
+                    <li>Open WhatsApp on your phone </li>
+                    <li>
+                      Tap <strong>Menu</strong> <ThreeDotsVertical />
+                      or <strong>Setting </strong> <Gear />
+                      and <strong>Linked Devices</strong>
+                    </li>
+                    <li>
+                      Tap on <strong>Link a Device</strong>
+                    </li>
+                    <li>Point your phone to this screen to capture the code</li>
+                  </ol>
+                </List>
+              </Left>
+              <Right>
+                <Code>
+                  <QRCode value="whatsapp" />
+                  <Button onClick={handleGoogleSignIn}>
+                    Sign In With Google
+                  </Button>
+                </Code>
+              </Right>
+            </FormContainer>
+          </Center>
+        </Container>
+      </Containers>
+    </>
+  );
+}
 
 const Containers = styled.div`
   background-color: #111b21;
@@ -90,42 +151,11 @@ const Right = styled.div`
 `;
 
 const Code = styled.div`
-  /* margin-left: 82px; */
-`;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-export default function Lower() {
-  return (
-    <>
-      <Containers>
-        <Container>
-          <Center>
-            <FormContainer>
-              <Left>
-                <h3>Use WhatsApp on your computer</h3>
-                <List>
-                  <ol>
-                    <li>Open WhatsApp on your phone </li>
-                    <li>
-                      Tap <strong>Menu</strong> <ThreeDotsVertical />
-                      or <strong>Setting </strong> <Gear />
-                      and <strong>Linked Devices</strong>
-                    </li>
-                    <li>
-                      Tap on <strong>Link a Device</strong>
-                    </li>
-                    <li>Point your phone to this screen to capture the code</li>
-                  </ol>
-                </List>
-              </Left>
-              <Right>
-                <Code>
-                  <QRCode value="whatsapp" />
-                </Code>
-              </Right>
-            </FormContainer>
-          </Center>
-        </Container>
-      </Containers>
-    </>
-  );
-}
+  svg {
+    margin-bottom: 20px;
+  }
+`;

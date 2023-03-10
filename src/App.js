@@ -6,8 +6,8 @@ import Chat from "./pages/Chat";
 function App() {
   return (
     <>
-      {/* <Header /> */}
-      <Chat />
+      <Header />
+      {/* <Chat /> */}
     </>
   );
 }
