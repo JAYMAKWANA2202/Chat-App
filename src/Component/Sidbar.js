@@ -18,7 +18,9 @@ export default function Sidbar() {
       </Header>
 
       <Search>
-        <BsSearch />
+        <SearchButton>
+          <BsSearch color="white" />
+        </SearchButton>
         <SearchInput placeholder="search chat" />
       </Search>
 
@@ -27,13 +29,14 @@ export default function Sidbar() {
   );
 }
 
-const Container = styled.div``;
-
+const Container = styled.div`
+  width: 25%;
+`;
 const Search = styled.div`
   display: flex;
   align-items: center;
-  padding: 20px;
-  border-radius: 2px;
+  padding: 17px;
+  /* border-radius: 2px; */
   background-color: #111b21;
 `;
 
@@ -43,6 +46,14 @@ const SearchInput = styled.input`
   flex: 1;
   background-color: #202c33;
   color: whitesmoke;
+  border-radius: 5px;
+  margin-left: 8px;
+  align-items: center;
+`;
+
+const SearchButton = styled.div`
+  cursor: pointer;
+  margin-left: -5px;
 `;
 
 const Header = styled.div`
@@ -56,7 +67,6 @@ const Header = styled.div`
   align-items: center;
   padding: 15px;
   height: 80px;
-  /* border-bottom: 1px solid whitesmoke; */
 `;
 
 const IconButton = styled.div`

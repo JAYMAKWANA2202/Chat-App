@@ -1,13 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  Firestore,
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBGGycRDcx7VfKykBSekJDNJhNKmqpsBJM",
@@ -29,9 +22,11 @@ export const signInWithGoogle = () => {
     .then(async (result) => {
       console.log("result:dddddddd ", result);
       const { displayName, email, uid } = result.user;
-      const userRef = doc(db, "user", uid);
+      const userRef = doc(db, "user", result.user.uid);
       await setDoc(userRef, { displayName, email, uid });
       console.log("User data saved successfully!");
+      // const ref = doc(db, "user", res.user.uid);
+      // const docref = await setDoc(ref, { email, password });
     })
     .catch((error) => console.logO(error));
 };
