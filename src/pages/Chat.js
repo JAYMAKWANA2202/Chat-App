@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Sidbar from "../Component/Sidbar";
 import Chatbar from "../Component/Chatbar";
-import ChatBox from "../Component/Navbar/ChatBox";
 
 export default function Chat() {
   return (
@@ -15,6 +14,9 @@ export default function Chat() {
 
 const Container = styled.div`
   display: flex;
-  padding: 12px;
-  background-color: white;
+  padding: 15px;
+  background-color: #111b21;
+  z-index: 1;
+  position: sticky;
+  height: 100vh;
 `;

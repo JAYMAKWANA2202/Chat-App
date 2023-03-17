@@ -1,18 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { FaRegUserCircle } from "react-icons/fa";
-import { CiMenuKebab } from "react-icons/ci";
-import { BsChatLeftTextFill, BsSearch } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
+import Button from "react-bootstrap/esm/Button";
+import Myimg from "../images/1.jpg";
 
 export default function Sidbar() {
   return (
     <Container>
       <Header>
-        <UserAvatar />
+        <img src={Myimg} height={30} />
 
         <IconButton>
-          <BsChatLeftTextFill style={{ marginRight: "10px" }} />
-          <CiMenuKebab style={{ marginBottom: "5px" }} />
+          <Button>Logout</Button>
         </IconButton>
       </Header>
 
@@ -23,23 +22,44 @@ export default function Sidbar() {
         <SearchInput placeholder="search chat" />
       </Search>
 
-      <UserChat>hsdshhcschcw</UserChat>
-
-      {/* List of chats */}
+      <UserChat>
+        <Chats>
+          <img src={Myimg} height={40} />
+          <span>jay makwana</span>
+        </Chats>
+        <Chats>
+          <img src={Myimg} height={40} />
+          <span>raj nariya </span>
+        </Chats>
+        <Chats>
+          <img src={Myimg} height={40} />
+          <span>kunj kaneriya</span>
+        </Chats>
+        <Chats>
+          <img src={Myimg} height={40} />
+          <span>het makwana</span>
+        </Chats>
+        <Chats>
+          <img src={Myimg} height={40} />
+          <span>het makwana</span>
+        </Chats>
+      </UserChat>
     </Container>
   );
 }
 
 const Container = styled.div`
-  /* border: 1px solid white; */
+  border-right: 1px solid grey;
   width: 25%;
 `;
 const Search = styled.div`
   display: flex;
   align-items: center;
   padding: 17px;
-
+  z-index: 2;
   background-color: #111b21;
+  position: sticky; /* add this line */
+  top: 80px; /* add this line */
 `;
 
 const SearchInput = styled.input`
@@ -70,6 +90,11 @@ const Header = styled.div`
   align-items: center;
   padding: 15px;
   height: 80px;
+
+  img {
+    border-radius: 50%;
+    cursor: pointer;
+  }
 `;
 
 const IconButton = styled.div`
@@ -78,7 +103,7 @@ const IconButton = styled.div`
   font-size: 25px;
 `;
 
-const UserAvatar = styled(FaRegUserCircle)`
+const Image = styled.div`
   margin: 10px;
   cursor: pointer;
   color: #aebac1;
@@ -89,4 +114,25 @@ const UserChat = styled.div`
   background-color: #111b21;
   color: white;
   height: 547px;
+  overflow: scroll;
+  /* display: flex; */
+
+  img {
+    border-radius: 50%;
+  }
+`;
+
+const Chats = styled.div`
+  height: 40px;
+  display: flex;
+  margin-top: 15px;
+  border-bottom: 1px solid gray;
+
+  span {
+    /* display: flex; */
+    margin-left: 15px;
+  }
+
+  p {
+  }
 `;
