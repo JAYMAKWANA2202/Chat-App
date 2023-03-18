@@ -1,5 +1,10 @@
 import React from "react";
+import Message from "./Message";
 
 export default function Messages() {
-  return <div>hello</div>;
+  return (
+    <div>
+      <Message />
+    </div>
+  );
 }

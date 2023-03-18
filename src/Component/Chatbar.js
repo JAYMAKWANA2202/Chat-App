@@ -1,11 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Form from "react-bootstrap/Form";
-import { TiAttachment, TiArrowForward } from "react-icons/ti";
 import { CiMenuKebab } from "react-icons/ci";
 import Myimg from "../images/1.jpg";
 import Inputbar from "./Inputbar";
-import Messages from "./Messages";
 
 export default function Chatbar() {
   return (
@@ -20,7 +17,9 @@ export default function Chatbar() {
         </Right>
       </Detail>
 
-      <ChatBox>{/* <Messages /> */}</ChatBox>
+      <ChatBox>
+        <Messages />
+      </ChatBox>
 
       <Inputbar />
     </Container>

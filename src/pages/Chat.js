@@ -18,5 +18,5 @@ const Container = styled.div`
   background-color: #111b21;
   z-index: 1;
   position: sticky;
-  height: 100vh;
+  height: 100%;
 `;

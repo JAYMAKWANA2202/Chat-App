@@ -39,10 +39,6 @@ export default function Sidbar() {
           <img src={Myimg} height={40} />
           <span>het makwana</span>
         </Chats>
-        <Chats>
-          <img src={Myimg} height={40} />
-          <span>het makwana</span>
-        </Chats>
       </UserChat>
     </Container>
   );
@@ -58,8 +54,8 @@ const Search = styled.div`
   padding: 17px;
   z-index: 2;
   background-color: #111b21;
-  position: sticky; /* add this line */
-  top: 80px; /* add this line */
+  position: sticky;
+  top: 80px;
 `;
 
 const SearchInput = styled.input`
@@ -103,13 +99,6 @@ const IconButton = styled.div`
   font-size: 25px;
 `;
 
-const Image = styled.div`
-  margin: 10px;
-  cursor: pointer;
-  color: #aebac1;
-  font-size: 31px;
-`;
-
 const UserChat = styled.div`
   background-color: #111b21;
   color: white;
@@ -123,16 +112,17 @@ const UserChat = styled.div`
 `;
 
 const Chats = styled.div`
-  height: 40px;
+  padding: 9px;
   display: flex;
-  margin-top: 15px;
+  /* margin-top: 15px; */
   border-bottom: 1px solid gray;
+  cursor: pointer;
 
   span {
-    /* display: flex; */
     margin-left: 15px;
   }
 
-  p {
+  :hover {
+    background-color: #0b141a;
   }
 `;
