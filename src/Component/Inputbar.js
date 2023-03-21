@@ -8,54 +8,44 @@ import { CiMenuKebab } from "react-icons/ci";
 export default function Inputbar() {
   return (
     <Container>
-      <TalkBar>
-        <Form1>
-          <Share>
-            <TiAttachment />
-          </Share>
-          <Form className="input ">
-            <Form.Control type="text" placeholder="Type a Message" />
-          </Form>
-          <Arrow>
-            <TiArrowForward />
-          </Arrow>
-        </Form1>
-      </TalkBar>
+      <input type="text" className="input" placeholder="Type Something....." />
+      <Share>
+        <TiAttachment style={{ fontSize: "30px", color: "black" }} />
+
+        <button>Send</button>
+      </Share>
     </Container>
   );
 }
 
-const Container = styled.div``;
-const TalkBar = styled.div`
-  background-color: #202c33;
-  height: 60px;
-  margin-top: 525px;
-  color: white;
-  z-index: 1;
-`;
-
-const Form1 = styled.div`
+const Container = styled.div`
+  height: 50px;
+  padding: 10px;
+  color: black;
+  background-color: gray;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 545px;
-  z-index: 1;
+  justify-content: space-between;
 
-  .input {
-    margin: 10px auto;
-    width: 85%;
+  input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    color: whitesmoke;
+    background-color: black;
   }
-`;
-
-const Arrow = styled.div`
-  font-size: 23px;
-  margin: 0 0px 5px 30px;
-  font-size: large;
-
-  cursor: pointer;
 `;
 
 const Share = styled.div`
   cursor: pointer;
-  margin: 0 30px 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  button {
+    border-radius: 5px;
+    /* background-color: gr; */
+    border: none;
+    outline: none;
+  }
 `;

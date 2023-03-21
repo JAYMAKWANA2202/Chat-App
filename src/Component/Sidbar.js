@@ -66,7 +66,6 @@ const SearchInput = styled.input`
   color: whitesmoke;
   border-radius: 5px;
   margin-left: 8px;
-  align-items: center;
 `;
 
 const SearchButton = styled.div`
@@ -97,6 +96,16 @@ const IconButton = styled.div`
   cursor: pointer;
   color: #aebac1;
   font-size: 25px;
+
+  Button {
+    background-color: gray;
+    color: antiquewhite;
+
+    :hover {
+      background-color: pink;
+      color: black;
+    }
+  }
 `;
 
 const UserChat = styled.div`

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { CiMenuKebab } from "react-icons/ci";
 import Myimg from "../images/1.jpg";
 import Inputbar from "./Inputbar";
+import Messages from "./Messages";
 
 export default function Chatbar() {
   return (
@@ -19,6 +20,16 @@ export default function Chatbar() {
 
       <ChatBox>
         <Messages />
+        <Messages />
+        <Messages />
+        <Messages />
+        <Messages />
+        <Messages />
+        <Messages />
+        <Messages />
+        <Messages />
+        <Messages />
+        <Messages />
       </ChatBox>
 
       <Inputbar />
@@ -30,8 +41,8 @@ const Container = styled.div`
   background-color: #0b141a;
   color: white;
   width: 75%;
-  text-align: center;
-  height: auto;
+  /* text-align: center; */
+  /* height: auto; */
 `;
 
 const Detail = styled.div`
@@ -66,5 +77,7 @@ const Right = styled.div`
 `;
 
 const ChatBox = styled.div`
-  color: white;
+  height: 559px;
+  background-color: aliceblue;
+  overflow-y: scroll;
 `;
