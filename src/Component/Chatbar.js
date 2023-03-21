@@ -78,6 +78,6 @@ const Right = styled.div`
 
 const ChatBox = styled.div`
   height: 559px;
-  background-color: aliceblue;
+  background-color: #111b21;
   overflow-y: scroll;
 `;

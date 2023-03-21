@@ -27,6 +27,14 @@ export default function Lower() {
       });
   };
 
+  const handleSignUp = () => {
+    navigate("/Signup");
+  };
+
+  const handleLogin = () => {
+    navigate("/Login");
+  };
+
   return (
     <>
       <Containers>
@@ -56,6 +64,8 @@ export default function Lower() {
                   <Button onClick={handleGoogleSignIn}>
                     Sign In With Google
                   </Button>
+                  <Button onClick={handleSignUp}>Signup</Button>
+                  <Button onClick={handleLogin}>Login</Button>
                 </Code>
               </Right>
             </FormContainer>

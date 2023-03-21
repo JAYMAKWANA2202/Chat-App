@@ -10,7 +10,7 @@ export default function Inputbar() {
     <Container>
       <input type="text" className="input" placeholder="Type Something....." />
       <Share>
-        <TiAttachment style={{ fontSize: "30px", color: "black" }} />
+        <TiAttachment style={{ fontSize: "30px", color: "white" }} />
 
         <button>Send</button>
       </Share>
@@ -22,7 +22,7 @@ const Container = styled.div`
   height: 50px;
   padding: 10px;
   color: black;
-  background-color: gray;
+  background-color: #202c33;
   display: flex;
   justify-content: space-between;
 
@@ -32,7 +32,8 @@ const Container = styled.div`
     outline: none;
     font-size: 18px;
     color: whitesmoke;
-    background-color: black;
+    background-color: #182229;
+    border-radius: 5px;
   }
 `;
 

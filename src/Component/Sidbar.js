@@ -98,12 +98,13 @@ const IconButton = styled.div`
   font-size: 25px;
 
   Button {
-    background-color: gray;
-    color: antiquewhite;
+    background-color: lightgray;
+    color: black;
+    border: none;
 
     :hover {
-      background-color: pink;
-      color: black;
+      background-color: darkgray;
+      color: whitesmoke;
     }
   }
 `;

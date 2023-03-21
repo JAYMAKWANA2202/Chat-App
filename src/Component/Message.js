@@ -24,10 +24,12 @@ const Container = styled.div`
 
   &.owner {
     flex-direction: row-reverse;
+    /* align-items: flex-start; */
+    gap: 10px;
 
     p {
-      background-color: aqua;
-      color: black;
+      background-color: #005c4b;
+      color: whitesmoke;
       border-radius: 10px 0 10px 10px;
       gap: 10px;
       padding: 10px 20px;
@@ -59,7 +61,7 @@ const MessageContent = styled.div`
   gap: 10px;
   align-items: flex-end;
   p {
-    background-color: black;
+    background-color: #202c33;
     color: whitesmoke;
     border-radius: 0px 10px 10px 10px;
     padding: 10px 20px;
