@@ -16,9 +16,7 @@ export default function Sidbar() {
       </Header>
 
       <Search>
-        <SearchButton>
-          <BsSearch color="white" />
-        </SearchButton>
+        <SearchButton>{/* <BsSearch color="white" /> */}</SearchButton>
         <SearchInput placeholder="search chat" />
       </Search>
 
@@ -55,6 +53,7 @@ const Search = styled.div`
   z-index: 2;
   background-color: #111b21;
   position: sticky;
+  overflow: hidden;
   top: 80px;
 `;
 

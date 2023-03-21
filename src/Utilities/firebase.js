@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -15,6 +20,22 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const provider = new GoogleAuthProvider();
+
+// Sigin with Email and password
+export const logInWithEmailAndPassword = async (email, password) => {
+  try {
+    await createUserWithEmailAndPassword(auth, email, password).then(
+      async (res) => {
+        // await addDoc(collection(db, "user"), { email, password });
+        const ref = doc(db, "user", res.user.uid);
+        const docref = await setDoc(ref, { email, password });
+      }
+    );
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
 
 //signin with google
 export const signInWithGoogle = () => {

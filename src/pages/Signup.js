@@ -5,8 +5,45 @@ import styled from "styled-components";
 import { Whatsapp } from "react-bootstrap-icons";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
+import { useState, useEffect } from "react";
+import Validation2 from "./Validation2";
+import { logInWithEmailAndPassword } from "../utilities/firebase";
 
 export default function Signup() {
+  const [values, setValues] = useState({
+    fullname: "",
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+    setErrors(Validation2(values));
+
+    if (Object.keys(errors).length === 0) {
+      // localStorage.setItem("values", JSON.stringify(values));
+      logInWithEmailAndPassword(values.email, values.password);
+    }
+  };
+
+  useEffect(() => {
+    if (
+      Object.keys(errors).length === 0 &&
+      values.fullname !== "" &&
+      values.email !== "" &&
+      values.password !== ""
+    ) {
+      alert("Your Form is Submitted");
+    }
+  }, [errors]);
+
   return (
     <>
       <Headerpart>
@@ -27,16 +64,21 @@ export default function Signup() {
         <Container>
           <Center>
             <FormContainer>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <h1>SignUp Page</h1>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label className="my-3">Name</Form.Label>
                   <Form.Control
                     type="text"
-                    name="text"
+                    name="fullname"
+                    onChange={handleChange}
                     placeholder="Enter Name"
+                    value={values.fullname}
                     autoComplete="off"
                   />
+                  {errors.fullname && (
+                    <p style={{ color: "red" }}>{errors.fullname}</p>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail">
@@ -44,9 +86,14 @@ export default function Signup() {
                   <Form.Control
                     type="email"
                     name="email"
+                    onChange={handleChange}
                     placeholder="Enter email"
+                    value={values.email}
                     autoComplete="off"
                   />
+                  {errors.email && (
+                    <p style={{ color: "red" }}>{errors.email}</p>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
@@ -54,9 +101,14 @@ export default function Signup() {
                   <Form.Control
                     type="password"
                     name="password"
+                    onChange={handleChange}
                     placeholder="Password"
+                    value={values.password}
                     autoComplete="off"
                   />
+                  {errors.password && (
+                    <p style={{ color: "red" }}>{errors.password}</p>
+                  )}
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
@@ -64,7 +116,12 @@ export default function Signup() {
                   <Form.Control type="file" name="file" autoComplete="off" />
                 </Form.Group>
 
-                <Button variant="success" type="submit" className="btn mt-3">
+                <Button
+                  variant="success"
+                  type="submit"
+                  className="btn mt-3"
+                  onClick={handleSubmit}
+                >
                   Sign Up
                 </Button>
                 <Form.Group controlId="formBasicPassword" className="mt-2">
