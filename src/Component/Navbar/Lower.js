@@ -60,11 +60,13 @@ export default function Lower() {
               </Left>
               <Right>
                 <Code>
-                  <QRCode value="whatsapp" />
+                  {/* <QRCode value="whatsapp" /> */}
                   <Button onClick={handleGoogleSignIn}>
                     Sign In With Google
                   </Button>
+                  <br />
                   <Button onClick={handleSignUp}>Signup</Button>
+                  <br />
                   <Button onClick={handleLogin}>Login</Button>
                 </Code>
               </Right>
