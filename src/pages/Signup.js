@@ -24,6 +24,7 @@ import { getStorage } from "firebase/storage";
 import { app } from "../utilities/firebase";
 import { getFirestore } from "firebase/firestore";
 import { async } from "@firebase/util";
+import { NavLink } from "react-router-dom";
 
 export default function Signup() {
   const auth = getAuth(app);
@@ -191,7 +192,9 @@ export default function Signup() {
                   Sign Up
                 </Button>
                 <Form.Group controlId="formBasicPassword" className="mt-2">
-                  <p>Do you have account? Login</p>
+                  <p>
+                    Do you have account? <NavLink to="/Login">Login</NavLink>
+                  </p>
                 </Form.Group>
               </Form>
             </FormContainer>

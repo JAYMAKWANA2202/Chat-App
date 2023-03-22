@@ -8,9 +8,9 @@ import Button from "react-bootstrap/esm/Button";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { app } from "../utilities/firebase";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Circles } from "react-loader-spinner";
-import { useEffect } from "react";
+import SignUp from "./Signup";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +30,7 @@ export default function Login() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 4000);
+    }, 10000);
 
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(async () => {
@@ -68,7 +68,9 @@ export default function Login() {
                 <h1>Login Page</h1>
 
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label className="my-2 lable">Email Address:</Form.Label>
+                  <Form.Label className="my-2 lable ">
+                    Email Address:
+                  </Form.Label>
                   <Form.Control
                     type="email"
                     name="email"
@@ -117,7 +119,9 @@ export default function Login() {
                 )}
 
                 <Form.Group controlId="formBasicPassword" className="mt-2">
-                  <p>Do you have account? SignUp</p>
+                  <p>
+                    Do you have account? <NavLink to="/signup">SignUp</NavLink>{" "}
+                  </p>
                 </Form.Group>
               </Form>
             </FormContainer>
