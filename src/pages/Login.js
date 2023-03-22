@@ -170,6 +170,9 @@ const FormContainer = styled(Form)`
   display: flex;
   justify-content: center;
   font-size: small;
+  h1 {
+    color: #111b21;
+  }
 
   @media screen and (max-width: 1024px) {
     flex-direction: column;

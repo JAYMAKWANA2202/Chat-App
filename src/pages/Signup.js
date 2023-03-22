@@ -7,32 +7,94 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import { useState, useEffect } from "react";
 import Validation2 from "./Validation2";
-import { logInWithEmailAndPassword } from "../utilities/firebase";
+// import { logInWithEmailAndPassword } from "../utilities/firebase";
+import {
+  uploadBytesResumable,
+  getDownloadURL,
+  ref,
+  docref,
+} from "firebase/storage";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { app } from "../utilities/firebase";
+import { getFirestore } from "firebase/firestore";
+import { async } from "@firebase/util";
 
 export default function Signup() {
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
   const [values, setValues] = useState({
     fullname: "",
     email: "",
     password: "",
-    file: "",
+    file: null,
   });
 
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    const { name, value, files } = e.target;
+    setValues((prevState) => ({
+      ...prevState,
+      [name]: files ? files : value,
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
+
     setErrors(Validation2(values));
 
+    const { fullname, email, password, file } = values;
+
     if (Object.keys(errors).length === 0) {
-      logInWithEmailAndPassword(values.email, values.password);
+      try {
+        const user = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        const storageRef = ref(storage, fullname);
+        const uploadTask = await uploadBytesResumable(storageRef, file);
+
+        uploadTask.on(
+          (error) => {
+            alert(error.message);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(
+              async (downloadURL, res) => {
+                await updateProfile(res.user, {
+                  displayName: fullname,
+                  photoURL: downloadURL,
+                });
+
+                // const userRef = doc(db, "user", res.user.uid);
+                await setDoc(doc(db, "user", res.user.uid), {
+                  uid: res.user.uid,
+                  fullname,
+                  email,
+                  photoURL: downloadURL,
+                });
+
+                alert("Image uploaded successfully!");
+              }
+            );
+          }
+        );
+      } catch (error) {
+        console.error(error);
+        alert(error.message);
+      }
     }
   };
-
   useEffect(() => {
     if (
       Object.keys(errors).length === 0 &&
@@ -65,10 +127,10 @@ export default function Signup() {
         <Container>
           <Center>
             <FormContainer>
-              <Form onSubmit={handleSubmit}>
+              <Form method="POST" onSubmit={handleSubmit}>
                 <h1>SignUp Page</h1>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label className="my-3">Name</Form.Label>
+                  <Form.Label className="my-2">Name</Form.Label>
                   <Form.Control
                     type="text"
                     name="fullname"
@@ -112,7 +174,7 @@ export default function Signup() {
                   )}
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group controlId="formBasicFile">
                   <Form.Label className="my-2">Choose the Photo</Form.Label>
                   <Form.Control
                     type="file"
@@ -120,7 +182,7 @@ export default function Signup() {
                     autoComplete="off"
                     value={values.file}
                   />
-                  {errors.file && <p style={{ color: "red" }}>{errors.file}</p>}
+                  {/*   {errors.file && <p style={{ color: "red" }}>{errors.file}</p>} */}
                 </Form.Group>
 
                 <Button
@@ -210,6 +272,10 @@ const FormContainer = styled(Form)`
   display: flex;
   justify-content: center;
   font-size: small;
+
+  h1 {
+    color: #111b21;
+  }
 
   @media screen and (max-width: 1024px) {
     flex-direction: column;
