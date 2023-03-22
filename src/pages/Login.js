@@ -9,8 +9,11 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { app } from "../utilities/firebase";
 import { useNavigate } from "react-router-dom";
+import { Circles } from "react-loader-spinner";
+import { useEffect } from "react";
 
 export default function Login() {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const auth = getAuth(app);
   const [values, setValues] = useState({
@@ -24,10 +27,15 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
 
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(async () => {
         console.log("welcome");
+
         if (signInWithEmailAndPassword) {
           navigate("/chat");
         }
@@ -60,7 +68,7 @@ export default function Login() {
                 <h1>Login Page</h1>
 
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Label className="my-2">Email Address:</Form.Label>
+                  <Form.Label className="my-2 lable">Email Address:</Form.Label>
                   <Form.Control
                     type="email"
                     name="email"
@@ -72,7 +80,7 @@ export default function Login() {
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                  <Form.Label className="my-2">Password:</Form.Label>
+                  <Form.Label className="my-2 lable">Password:</Form.Label>
                   <Form.Control
                     type="password"
                     name="password"
@@ -82,15 +90,32 @@ export default function Login() {
                     value={values.password}
                   />
                 </Form.Group>
+                {isLoading ? (
+                  <Circles
+                    height="100"
+                    width="80"
+                    margin
+                    color="#4fa94d"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                    wrapperClass=""
+                    visible={true}
+                  />
+                ) : (
+                  <Button
+                    variant="success"
+                    type="submit"
+                    className="btn mt-3"
+                    onClick={handleSubmit}
+                  >
+                    Login
+                  </Button>
+                )}
 
-                <Button
-                  variant="success"
-                  type="submit"
-                  className="btn mt-3"
-                  onClick={handleSubmit}
-                >
-                  Login
-                </Button>
                 <Form.Group controlId="formBasicPassword" className="mt-2">
                   <p>Do you have account? SignUp</p>
                 </Form.Group>

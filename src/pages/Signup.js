@@ -55,11 +55,7 @@ export default function Signup() {
 
     if (Object.keys(errors).length === 0) {
       try {
-        const user = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        const res = await createUserWithEmailAndPassword(auth, email, password);
 
         const storageRef = ref(storage, fullname);
         const uploadTask = await uploadBytesResumable(storageRef, file);
@@ -81,6 +77,7 @@ export default function Signup() {
                   uid: res.user.uid,
                   fullname,
                   email,
+                  password,
                   photoURL: downloadURL,
                 });
 

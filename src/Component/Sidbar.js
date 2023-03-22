@@ -3,15 +3,21 @@ import styled from "styled-components";
 import { BsSearch } from "react-icons/bs";
 import Button from "react-bootstrap/esm/Button";
 import Myimg from "../images/1.jpg";
+import { signOut } from "firebase/auth";
+import { auth } from "../utilities/firebase";
 
 export default function Sidbar() {
+  const handelLogout = () => {
+    console.log("handelLogout: ", handelLogout);
+    signOut(auth);
+  };
   return (
     <Container>
       <Header>
         <img src={Myimg} height={30} />
 
         <IconButton>
-          <Button>Logout</Button>
+          <Button onClick={handelLogout}>Logout</Button>
         </IconButton>
       </Header>
 
