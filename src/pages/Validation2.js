@@ -15,6 +15,9 @@ const Validation2 = (values) => {
   if (!values.password) {
     errors.password = "*password is required";
   }
+  if (!values.file) {
+    errors.file = "*photo is required";
+  }
 
   return errors;
 };

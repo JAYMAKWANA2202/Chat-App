@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import styled from "styled-components";
-import { Whatsapp } from "react-bootstrap-icons";
+import { Link, Whatsapp } from "react-bootstrap-icons";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import { useState, useEffect } from "react";
@@ -14,6 +14,7 @@ export default function Signup() {
     fullname: "",
     email: "",
     password: "",
+    file: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -28,7 +29,6 @@ export default function Signup() {
     setErrors(Validation2(values));
 
     if (Object.keys(errors).length === 0) {
-      // localStorage.setItem("values", JSON.stringify(values));
       logInWithEmailAndPassword(values.email, values.password);
     }
   };
@@ -38,7 +38,8 @@ export default function Signup() {
       Object.keys(errors).length === 0 &&
       values.fullname !== "" &&
       values.email !== "" &&
-      values.password !== ""
+      values.password !== "" &&
+      values.file !== ""
     ) {
       alert("Your Form is Submitted");
     }
@@ -113,7 +114,13 @@ export default function Signup() {
 
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label className="my-2">Choose the Photo</Form.Label>
-                  <Form.Control type="file" name="file" autoComplete="off" />
+                  <Form.Control
+                    type="file"
+                    name="file"
+                    autoComplete="off"
+                    value={values.file}
+                  />
+                  {errors.file && <p style={{ color: "red" }}>{errors.file}</p>}
                 </Form.Group>
 
                 <Button
