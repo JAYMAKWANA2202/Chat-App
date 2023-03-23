@@ -23,10 +23,11 @@ import { doc, setDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { app } from "../utilities/firebase";
 import { getFirestore } from "firebase/firestore";
-import { async } from "@firebase/util";
 import { NavLink } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function Signup() {
+export default function Signup(props) {
   const auth = getAuth(app);
   const db = getFirestore(app);
   const storage = getStorage(app);
@@ -59,37 +60,37 @@ export default function Signup() {
         const res = await createUserWithEmailAndPassword(auth, email, password);
 
         const storageRef = ref(storage, fullname);
-        const uploadTask = await uploadBytesResumable(storageRef, file);
+        // const uploadTask = await uploadBytesResumable(storageRef, file);
 
-        uploadTask.on(
-          (error) => {
-            alert(error.message);
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then(
-              async (downloadURL, res) => {
-                await updateProfile(res.user, {
-                  displayName: fullname,
-                  photoURL: downloadURL,
-                });
+        // uploadTask.on(
+        //   (error) => {
+        //     alert(error.message);
+        //   },
+        //   () => {
+        //     getDownloadURL(uploadTask.snapshot.ref).then(
+        //       async (downloadURL, res) => {
+        //         await updateProfile(res.user, {
+        //           displayName: fullname,
+        //           photoURL: downloadURL,
+        //         });
 
-                // const userRef = doc(db, "user", res.user.uid);
-                await setDoc(doc(db, "user", res.user.uid), {
-                  uid: res.user.uid,
-                  fullname,
-                  email,
-                  password,
-                  photoURL: downloadURL,
-                });
+        //         // const userRef = doc(db, "user", res.user.uid);
+        //         await setDoc(doc(db, "user", res.user.uid), {
+        //           uid: res.user.uid,
+        //           fullname,
+        //           email,
+        //           password,
+        //           photoURL: downloadURL,
+        //         });
 
-                alert("Image uploaded successfully!");
-              }
-            );
-          }
-        );
+        //         alert("Image uploaded successfully!");
+        //       }
+        //     );
+        //   }
+        // );
       } catch (error) {
         console.error(error);
-        alert(error.message);
+        toast.error(error.message);
       }
     }
   };
@@ -101,7 +102,16 @@ export default function Signup() {
       values.password !== "" &&
       values.file !== ""
     ) {
-      alert("Your Form is Submitted");
+      toast("Your Form is Submitted", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }, [errors]);
 
@@ -201,6 +211,7 @@ export default function Signup() {
           </Center>
         </Container>
       </Containers>
+      <ToastContainer />
     </>
   );
 }

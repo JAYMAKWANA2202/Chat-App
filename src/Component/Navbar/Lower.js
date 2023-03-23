@@ -3,13 +3,16 @@ import styled from "styled-components";
 import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
 import { Gear, ThreeDotsVertical } from "react-bootstrap-icons";
-import QRCode from "react-qr-code";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../utilities/firebase";
+// import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function Lower() {
+export default function Lower(props) {
+  // const [click, setClick] = useState();
   const navigate = useNavigate();
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
@@ -23,7 +26,7 @@ export default function Lower() {
         }
       })
       .catch((error) => {
-        alert(error);
+        toast.error(error);
       });
   };
 
@@ -60,7 +63,6 @@ export default function Lower() {
               </Left>
               <Right>
                 <Code>
-                  {/* <QRCode value="whatsapp" /> */}
                   <Button onClick={handleGoogleSignIn}>
                     Sign In With Google
                   </Button>
@@ -74,6 +76,7 @@ export default function Lower() {
           </Center>
         </Container>
       </Containers>
+      <ToastContainer />
     </>
   );
 }
@@ -166,6 +169,12 @@ const Code = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  margin-top: 70px;
+
+  Button {
+    width: 167.6px;
+  }
 
   svg {
     margin-bottom: 20px;

@@ -10,7 +10,8 @@ import { useState } from "react";
 import { app } from "../utilities/firebase";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Circles } from "react-loader-spinner";
-import SignUp from "./Signup";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +31,7 @@ export default function Login() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-    }, 10000);
+    }, 3500);
 
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(async () => {
@@ -41,11 +42,12 @@ export default function Login() {
         }
       })
       .catch((error) => {
-        alert(error);
+        toast.error("opps! somthing is wrong");
       });
   };
   return (
     <>
+      <ToastContainer />
       <Headerpart>
         <Navbar>
           <Container>
@@ -96,7 +98,6 @@ export default function Login() {
                   <Circles
                     height="100"
                     width="80"
-                    margin
                     color="#4fa94d"
                     ariaLabel="circles-loading"
                     wrapperStyle={{
@@ -120,7 +121,7 @@ export default function Login() {
 
                 <Form.Group controlId="formBasicPassword" className="mt-2">
                   <p>
-                    Do you have account? <NavLink to="/signup">SignUp</NavLink>{" "}
+                    Do you have account? <NavLink to="/signup">SignUp</NavLink>
                   </p>
                 </Form.Group>
               </Form>

@@ -5,11 +5,14 @@ import Button from "react-bootstrap/esm/Button";
 import Myimg from "../images/1.jpg";
 import { signOut } from "firebase/auth";
 import { auth } from "../utilities/firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidbar() {
+  const Navigate = useNavigate();
   const handelLogout = () => {
     console.log("handelLogout: ", handelLogout);
     signOut(auth);
+    Navigate("/login");
   };
   return (
     <Container>
