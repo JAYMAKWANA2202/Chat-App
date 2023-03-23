@@ -1,8 +1,5 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
 import styled from "styled-components";
-import { Link, Whatsapp } from "react-bootstrap-icons";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import { useState, useEffect } from "react";
@@ -23,11 +20,12 @@ import { doc, setDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { app } from "../utilities/firebase";
 import { getFirestore } from "firebase/firestore";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Signup(props) {
+export default function Signup() {
+  const [click, setClick] = useState(true);
   const auth = getAuth(app);
   const db = getFirestore(app);
   const storage = getStorage(app);
@@ -94,6 +92,7 @@ export default function Signup(props) {
       }
     }
   };
+
   useEffect(() => {
     if (
       Object.keys(errors).length === 0 &&
@@ -181,6 +180,7 @@ export default function Signup(props) {
           >
             Sign Up
           </Button>
+
           {/* <Form.Group controlId="formBasicPassword" className="mt-2">
             <p>
               Do you have account? <NavLink to="/Login">Login</NavLink>

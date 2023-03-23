@@ -34,7 +34,6 @@ export default function Lower(props) {
   };
 
   const handleSignUp = () => {
-    // navigate("/Signup");
     setClick(false);
     setpage("signup");
   };
@@ -42,6 +41,10 @@ export default function Lower(props) {
   const handleLogin = () => {
     setClick(false);
     setpage("login");
+  };
+
+  const handleBack = () => {
+    setClick(true);
   };
 
   return (
@@ -70,20 +73,37 @@ export default function Lower(props) {
               {click ? (
                 <Right>
                   <Code>
-                    <Button onClick={handleGoogleSignIn}>
+                    {/* <Button onClick={handleGoogleSignIn}>
                       Sign In With Google
                     </Button>
-                    <br />
+                    <br /> */}
 
-                    <Button onClick={handleSignUp}>Signup</Button>
+                    <Button
+                      onClick={handleLogin}
+                      style={{
+                        width: "250px",
+                        marginTop: "50px",
+                      }}
+                    >
+                      SignIn With Email password
+                    </Button>
 
-                    <br />
-                    <Button onClick={handleLogin}>Login</Button>
+                    {/* <br />
+                    <Button onClick={handleLogin}>Login</Button> */}
                   </Code>
                 </Right>
               ) : (
                 <>
                   <SideRight>
+                    <Button
+                      onClick={handleBack}
+                      style={{
+                        width: "250px",
+                        marginRight: "58px",
+                      }}
+                    >
+                      Sign In With Email password
+                    </Button>
                     {page === "signup" && <Signup2 />}
                     <SideLogin>{page === "login" && <Login2 />}</SideLogin>
                   </SideRight>
@@ -185,11 +205,15 @@ const Right = styled.div`
 const SideRight = styled.div`
   margin-right: 50px;
   margin-top: -24px;
+
+  Button {
+    /* width: 300px; */
+  }
 `;
 
 const SideLogin = styled.div`
   margin-right: 70px;
-  margin-top: 25px;
+  margin-top: 5px;
 `;
 
 const Code = styled.div`

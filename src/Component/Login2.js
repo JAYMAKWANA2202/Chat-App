@@ -32,7 +32,7 @@ export default function Login2() {
 
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(async () => {
-        console.log("welcome");
+        toast.success("welcome to chat app");
 
         if (signInWithEmailAndPassword) {
           navigate("/chat");
@@ -48,8 +48,6 @@ export default function Login2() {
 
       <FormContainer>
         <Form onSubmit={handleSubmit}>
-          <h1>Login Page</h1>
-
           <Form.Group controlId="formBasicEmail">
             <Form.Label className="my-2 lable ">Email Address:</Form.Label>
             <Form.Control
