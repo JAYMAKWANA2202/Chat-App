@@ -5,6 +5,28 @@ import styled from "styled-components";
 import Lower from "./Lower";
 import { Whatsapp } from "react-bootstrap-icons";
 
+export default function Header() {
+  return (
+    <>
+      <Headerpart>
+        <Navbar>
+          <Container>
+            <New>
+              <Logo>
+                <span>
+                  <Whatsapp size={39} color="white" />
+                </span>
+              </Logo>
+              <Navbar_Brand>Chat-App</Navbar_Brand>
+            </New>
+          </Container>
+        </Navbar>
+      </Headerpart>
+      <Lower />
+    </>
+  );
+}
+
 const Headerpart = styled.div`
   background-color: #00a884;
   height: 223px;
@@ -40,25 +62,3 @@ const Logo = styled.span`
     margin-left: 0;
   }
 `;
-
-export default function Header() {
-  return (
-    <>
-      <Headerpart>
-        <Navbar>
-          <Container>
-            <New>
-              <Logo>
-                <span>
-                  <Whatsapp size={39} color="white" />
-                </span>
-              </Logo>
-              <Navbar_Brand>Chat-App</Navbar_Brand>
-            </New>
-          </Container>
-        </Navbar>
-      </Headerpart>
-      <Lower />
-    </>
-  );
-}

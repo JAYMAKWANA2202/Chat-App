@@ -105,7 +105,7 @@ export default function Login() {
                       justifyContent: "center",
                       alignItems: "center",
                     }}
-                    wrapperClass=""
+                    wrapperClass="Content"
                     visible={true}
                   />
                 ) : (

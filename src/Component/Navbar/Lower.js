@@ -7,12 +7,15 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from "../../utilities/firebase";
-// import { useState } from "react";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Signup2 from "../Signup2";
+import Login2 from "../Login2";
 
 export default function Lower(props) {
-  // const [click, setClick] = useState();
+  const [click, setClick] = useState(true);
+  const [page, setpage] = useState("menu");
   const navigate = useNavigate();
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
@@ -31,11 +34,15 @@ export default function Lower(props) {
   };
 
   const handleSignUp = () => {
-    navigate("/Signup");
+    // navigate("/Signup");
+    setClick(false);
+    setpage("signup");
   };
 
   const handleLogin = () => {
-    navigate("/Login");
+    // navigate("/Login");
+    setClick(false);
+    setpage("login");
   };
 
   return (
@@ -61,17 +68,28 @@ export default function Lower(props) {
                   </ol>
                 </List>
               </Left>
-              <Right>
-                <Code>
-                  <Button onClick={handleGoogleSignIn}>
-                    Sign In With Google
-                  </Button>
-                  <br />
-                  <Button onClick={handleSignUp}>Signup</Button>
-                  <br />
-                  <Button onClick={handleLogin}>Login</Button>
-                </Code>
-              </Right>
+              {click ? (
+                <Right>
+                  <Code>
+                    <Button onClick={handleGoogleSignIn}>
+                      Sign In With Google
+                    </Button>
+                    <br />
+
+                    <Button onClick={handleSignUp}>Signup</Button>
+
+                    <br />
+                    <Button onClick={handleLogin}>Login</Button>
+                  </Code>
+                </Right>
+              ) : (
+                <>
+                  <SideRight>
+                    {page === "signup" && <Signup2 />}
+                    {page === "login" && <Login2 />}
+                  </SideRight>
+                </>
+              )}
             </FormContainer>
           </Center>
         </Container>
@@ -163,6 +181,11 @@ const Right = styled.div`
     margin-bottom: 30px;
     text-align: center;
   }
+`;
+
+const SideRight = styled.div`
+  margin-right: 50px;
+  margin-top: -24px;
 `;
 
 const Code = styled.div`
