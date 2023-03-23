@@ -1,8 +1,5 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
 import styled from "styled-components";
-import { Whatsapp } from "react-bootstrap-icons";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -12,6 +9,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Circles } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 export default function Login2() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -46,7 +44,7 @@ export default function Login2() {
   };
   return (
     <>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
 
       <FormContainer>
         <Form onSubmit={handleSubmit}>
@@ -100,11 +98,11 @@ export default function Login2() {
             </Button>
           )}
 
-          <Form.Group controlId="formBasicPassword" className="mt-2">
+          {/* <Form.Group controlId="formBasicPassword" className="mt-2">
             <p>
               Do you have account? <NavLink to="/signup">SignUp</NavLink>
             </p>
-          </Form.Group>
+          </Form.Group> */}
         </Form>
       </FormContainer>
     </>

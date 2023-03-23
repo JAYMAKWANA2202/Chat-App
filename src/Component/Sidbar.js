@@ -12,7 +12,7 @@ export default function Sidbar() {
   const handelLogout = () => {
     console.log("handelLogout: ", handelLogout);
     signOut(auth);
-    Navigate("/login");
+    Navigate("/");
   };
   return (
     <Container>

@@ -40,7 +40,6 @@ export default function Lower(props) {
   };
 
   const handleLogin = () => {
-    // navigate("/Login");
     setClick(false);
     setpage("login");
   };
@@ -86,7 +85,7 @@ export default function Lower(props) {
                 <>
                   <SideRight>
                     {page === "signup" && <Signup2 />}
-                    {page === "login" && <Login2 />}
+                    <SideLogin>{page === "login" && <Login2 />}</SideLogin>
                   </SideRight>
                 </>
               )}
@@ -186,6 +185,11 @@ const Right = styled.div`
 const SideRight = styled.div`
   margin-right: 50px;
   margin-top: -24px;
+`;
+
+const SideLogin = styled.div`
+  margin-right: 70px;
+  margin-top: 25px;
 `;
 
 const Code = styled.div`

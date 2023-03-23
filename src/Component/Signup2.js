@@ -119,7 +119,6 @@ export default function Signup(props) {
     <>
       <FormContainer>
         <Form method="POST" onSubmit={handleSubmit}>
-          <h1>SignUp Page</h1>
           <Form.Group controlId="formBasicEmail">
             <Form.Label className="my-2">Name</Form.Label>
             <Form.Control
@@ -182,11 +181,11 @@ export default function Signup(props) {
           >
             Sign Up
           </Button>
-          <Form.Group controlId="formBasicPassword" className="mt-2">
+          {/* <Form.Group controlId="formBasicPassword" className="mt-2">
             <p>
               Do you have account? <NavLink to="/Login">Login</NavLink>
             </p>
-          </Form.Group>
+          </Form.Group> */}
         </Form>
       </FormContainer>
     </>
