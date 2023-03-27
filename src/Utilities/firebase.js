@@ -29,6 +29,8 @@ export const logInWithEmailAndPassword = async (email, password, fullname) => {
       async (res) => {
         const ref = doc(db, "user", res.user.uid);
         const docref = await setDoc(ref, { fullname, email, password });
+        const ref1 = doc(db, "userChat", res.user.uid);
+        const docref1 = await setDoc(ref1, {});
       }
     );
 

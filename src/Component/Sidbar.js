@@ -10,8 +10,11 @@ import { useState } from "react";
 import { db } from "../utilities/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { AuthContext } from "../../src/Context/AuthContext";
 
 export default function Sidbar() {
+  const { currentuser } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(null);
@@ -44,9 +47,11 @@ export default function Sidbar() {
     <Container>
       <Header>
         <img src={Myimg1} height={30} />
-        <span></span>
+        <span>{currentuser.fullname}</span>
         <IconButton>
-          <Button onClick={handelLogout}>Logout</Button>
+          <Button onClick={handelLogout} className="w-100 ">
+            Logout
+          </Button>
         </IconButton>
       </Header>
       <Search>
@@ -73,6 +78,7 @@ export default function Sidbar() {
             <span>{user.fullname}</span>
           </Chats>
         )}
+        {err && <span>User not found!</span>}
         <Chats>
           <img src={Myimg} height={40} />
           <span>raj nariya </span>
