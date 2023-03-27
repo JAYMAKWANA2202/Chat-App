@@ -53,7 +53,7 @@ export default function Signup() {
     setErrors(Validation2(values));
 
     if (Object.keys(errors).length === 0) {
-      logInWithEmailAndPassword(values.email, values.password);
+      logInWithEmailAndPassword(values.email, values.password, values.fullname);
     }
   };
 
@@ -69,16 +69,16 @@ export default function Signup() {
       values.password !== "" &&
       values.file !== ""
     ) {
-      toast.success("Your Form is Submitted", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      // toast.success("Your Form is Submitted", {
+      //   position: "top-right",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
     }
   }, [errors]);
 
@@ -88,7 +88,7 @@ export default function Signup() {
         <FormContainer>
           <Form method="POST" onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label className="my-2">Name</Form.Label>
+              <Form.Label className="my-2 ">Name:</Form.Label>
               <Form.Control
                 type="text"
                 name="fullname"
@@ -129,17 +129,6 @@ export default function Signup() {
                 <p style={{ color: "red" }}>{errors.password}</p>
               )}
             </Form.Group>
-
-            {/* <Form.Group controlId="formBasicFile">
-              <Form.Label className="my-2">Choose the Photo</Form.Label>
-              <Form.Control
-                type="file"
-                name="file"
-                autoComplete="off"
-                value={values.file}
-              /> */}
-            {/*   {errors.file && <p style={{ color: "red" }}>{errors.file}</p>} */}
-            {/* </Form.Group> */}
 
             <Button
               variant="success"

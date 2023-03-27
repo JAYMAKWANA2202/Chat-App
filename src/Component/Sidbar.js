@@ -1,39 +1,76 @@
 import React from "react";
 import styled from "styled-components";
-import { BsSearch } from "react-icons/bs";
 import Button from "react-bootstrap/esm/Button";
 import Myimg from "../images/1.jpg";
 import { signOut } from "firebase/auth";
 import { auth } from "../utilities/firebase";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { db } from "../utilities/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 export default function Sidbar() {
+  const [username, setUsername] = useState("");
+  const [user, setUser] = useState(null);
+  const [err, setErr] = useState(null);
+
   const Navigate = useNavigate();
+
   const handelLogout = () => {
     console.log("handelLogout: ", handelLogout);
     signOut(auth);
     Navigate("/");
   };
+
+  const handelSearch = async () => {
+    const q = query(collection(db, "user"), where("fullname", "==", username));
+    try {
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setUser(doc.data());
+      });
+    } catch (err) {
+      setErr(toast.error);
+    }
+  };
+
+  const handelKey = (e) => {
+    e.code === "Enter" && handelSearch();
+  };
   return (
     <Container>
       <Header>
         <img src={Myimg} height={30} />
-
         <IconButton>
           <Button onClick={handelLogout}>Logout</Button>
         </IconButton>
       </Header>
 
       <Search>
-        <SearchButton>{/* <BsSearch color="white" /> */}</SearchButton>
-        <SearchInput placeholder="search chat" />
+        <SearchInput
+          placeholder="search chat"
+          onKeyDown={handelKey}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        {/* <ChatInfo>
+          {user && (
+            <Chats>
+              <img src={Myimg} height={40} />
+              <span>{user.fullname}</span>
+            </Chats>
+          )}
+        </ChatInfo> */}
       </Search>
 
       <UserChat>
-        <Chats>
-          <img src={Myimg} height={40} />
-          <span>jay makwana</span>
-        </Chats>
+        {user && (
+          <Chats>
+            <img src={Myimg} height={40} />
+            <span>{user.fullname}</span>
+          </Chats>
+        )}
         <Chats>
           <img src={Myimg} height={40} />
           <span>raj nariya </span>
@@ -57,7 +94,7 @@ const Container = styled.div`
 `;
 const Search = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   padding: 17px;
   z-index: 2;
   background-color: #111b21;
@@ -133,8 +170,31 @@ const Chats = styled.div`
   padding: 9px;
   display: flex;
   /* margin-top: 15px; */
+  /* border-bottom: 1px solid gray; */
+  cursor: pointer;
+  width: 100%;
+
+  img {
+    border-radius: 50%;
+  }
+
+  span {
+    margin-left: 15px;
+  }
+
+  :hover {
+    background-color: #0b141a;
+  }
+`;
+
+const ChatInfo = styled.div`
+  display: flex;
+  padding: 9px;
+  display: flex;
+  /* margin-top: 15px; */
   border-bottom: 1px solid gray;
   cursor: pointer;
+  color: whitesmoke;
 
   span {
     margin-left: 15px;

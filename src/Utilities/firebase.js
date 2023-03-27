@@ -37,16 +37,16 @@ export const storage = getStorage();
 //     .catch((error) => console.log(error));
 // };
 
-export const logInWithEmailAndPassword = async (email, password) => {
+export const logInWithEmailAndPassword = async (email, password, fullname) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password).then(
       async (res) => {
-        await addDoc(collection(db, "user"), { email, password });
+        // await addDoc(collection(db, "user"), { email, password });
         const ref = doc(db, "user", res.user.uid);
-        const docref = await setDoc(ref, { email, password });
+        const docref = await setDoc(ref, { fullname, email, password });
       }
     );
-    // toast.success("Form is submmited in data base ");
+    toast.success("Form is submmited in data base ");
   } catch (err) {
     toast.error(err.message);
   }

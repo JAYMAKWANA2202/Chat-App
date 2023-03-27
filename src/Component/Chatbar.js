@@ -22,14 +22,6 @@ export default function Chatbar() {
         <Messages />
         <Messages />
         <Messages />
-        <Messages />
-        <Messages />
-        <Messages />
-        <Messages />
-        <Messages />
-        <Messages />
-        <Messages />
-        <Messages />
       </ChatBox>
 
       <Inputbar />

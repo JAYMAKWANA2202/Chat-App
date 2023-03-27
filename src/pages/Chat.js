@@ -16,6 +16,5 @@ const Container = styled.div`
   display: flex;
   padding: 11px;
   background-color: #111b21;
-
   height: 100%;
 `;
