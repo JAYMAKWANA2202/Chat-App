@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "react-bootstrap/esm/Button";
 import Myimg from "../images/1.jpg";
+import Myimg1 from "../images/3.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../utilities/firebase";
 import { useNavigate } from "react-router-dom";
@@ -31,22 +32,23 @@ export default function Sidbar() {
         setUser(doc.data());
       });
     } catch (err) {
-      setErr(toast.error);
+      setErr(toast.error(true));
     }
   };
 
   const handelKey = (e) => {
     e.code === "Enter" && handelSearch();
   };
+
   return (
     <Container>
       <Header>
-        <img src={Myimg} height={30} />
+        <img src={Myimg1} height={30} />
+        <span></span>
         <IconButton>
           <Button onClick={handelLogout}>Logout</Button>
         </IconButton>
       </Header>
-
       <Search>
         <SearchInput
           placeholder="search chat"

@@ -66,13 +66,13 @@ export default function Login2() {
 
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(async () => {
-        console.log("welcome");
         if (signInWithEmailAndPassword) {
           navigate("/chat");
+          toast.success("welcome to chat app");
         }
       })
       .catch((error) => {
-        alert(error);
+        toast.error(error.message);
       });
 
     //   const actionCodeSettings = {
@@ -92,17 +92,6 @@ export default function Login2() {
     //       toast.error("Oops! Something went wrong.");
     //     });
     //   console.log("sendSignInLinkToEmail: ", sendSignInLinkToEmail);
-
-    // signInWithEmailAndPassword(auth, values.email, values.password)
-    //   .then(async () => {
-    //     if (signInWithEmailAndPassword) {
-    //       navigate("/chat");
-    //       toast.success("welcome to chat app");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     toast.error("opps! somthing is wrong");
-    //   });
   };
 
   return (
