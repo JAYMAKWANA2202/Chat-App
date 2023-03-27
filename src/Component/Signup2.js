@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import { useState, useEffect } from "react";
 import Validation2 from "../pages/Validation2";
-// import { logInWithEmailAndPassword } from "../utilities/firebase";
+import { logInWithEmailAndPassword } from "../utilities/firebase";
 import {
   uploadBytesResumable,
   getDownloadURL,
@@ -21,11 +21,13 @@ import { getStorage } from "firebase/storage";
 import { app } from "../utilities/firebase";
 import { getFirestore } from "firebase/firestore";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Login2 from "./Login2";
 
 export default function Signup() {
   const [click, setClick] = useState(true);
+  const [login, setLogin] = useState(true);
   const auth = getAuth(app);
   const db = getFirestore(app);
   const storage = getStorage(app);
@@ -48,49 +50,15 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setErrors(Validation2(values));
 
-    const { fullname, email, password, file } = values;
-
     if (Object.keys(errors).length === 0) {
-      try {
-        const res = await createUserWithEmailAndPassword(auth, email, password);
-
-        const storageRef = ref(storage, fullname);
-        // const uploadTask = await uploadBytesResumable(storageRef, file);
-
-        // uploadTask.on(
-        //   (error) => {
-        //     alert(error.message);
-        //   },
-        //   () => {
-        //     getDownloadURL(uploadTask.snapshot.ref).then(
-        //       async (downloadURL, res) => {
-        //         await updateProfile(res.user, {
-        //           displayName: fullname,
-        //           photoURL: downloadURL,
-        //         });
-
-        //         // const userRef = doc(db, "user", res.user.uid);
-        //         await setDoc(doc(db, "user", res.user.uid), {
-        //           uid: res.user.uid,
-        //           fullname,
-        //           email,
-        //           password,
-        //           photoURL: downloadURL,
-        //         });
-
-        //         alert("Image uploaded successfully!");
-        //       }
-        //     );
-        //   }
-        // );
-      } catch (error) {
-        console.error(error);
-        toast.error(error.message);
-      }
+      logInWithEmailAndPassword(values.email, values.password);
     }
+  };
+
+  const handleLogin = () => {
+    setLogin(false);
   };
 
   useEffect(() => {
@@ -101,7 +69,7 @@ export default function Signup() {
       values.password !== "" &&
       values.file !== ""
     ) {
-      toast("Your Form is Submitted", {
+      toast.success("Your Form is Submitted", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -116,78 +84,84 @@ export default function Signup() {
 
   return (
     <>
-      <FormContainer>
-        <Form method="POST" onSubmit={handleSubmit}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label className="my-2">Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="fullname"
-              onChange={handleChange}
-              placeholder="Enter Name"
-              value={values.fullname}
-              autoComplete="off"
-            />
-            {errors.fullname && (
-              <p style={{ color: "red" }}>{errors.fullname}</p>
-            )}
-          </Form.Group>
+      {login ? (
+        <FormContainer>
+          <Form method="POST" onSubmit={handleSubmit}>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label className="my-2">Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="fullname"
+                onChange={handleChange}
+                placeholder="Enter Name"
+                value={values.fullname}
+                autoComplete="off"
+              />
+              {errors.fullname && (
+                <p style={{ color: "red" }}>{errors.fullname}</p>
+              )}
+            </Form.Group>
 
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label className="my-2">Email Address:</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              onChange={handleChange}
-              placeholder="Enter email"
-              value={values.email}
-              autoComplete="off"
-            />
-            {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
-          </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label className="my-2">Email Address:</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                onChange={handleChange}
+                placeholder="Enter email"
+                value={values.email}
+                autoComplete="off"
+              />
+              {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+            </Form.Group>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label className="my-2">Password:</Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              onChange={handleChange}
-              placeholder="Password"
-              value={values.password}
-              autoComplete="off"
-            />
-            {errors.password && (
-              <p style={{ color: "red" }}>{errors.password}</p>
-            )}
-          </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label className="my-2">Password:</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                onChange={handleChange}
+                placeholder="Password"
+                value={values.password}
+                autoComplete="off"
+              />
+              {errors.password && (
+                <p style={{ color: "red" }}>{errors.password}</p>
+              )}
+            </Form.Group>
 
-          <Form.Group controlId="formBasicFile">
-            <Form.Label className="my-2">Choose the Photo</Form.Label>
-            <Form.Control
-              type="file"
-              name="file"
-              autoComplete="off"
-              value={values.file}
-            />
+            {/* <Form.Group controlId="formBasicFile">
+              <Form.Label className="my-2">Choose the Photo</Form.Label>
+              <Form.Control
+                type="file"
+                name="file"
+                autoComplete="off"
+                value={values.file}
+              /> */}
             {/*   {errors.file && <p style={{ color: "red" }}>{errors.file}</p>} */}
-          </Form.Group>
+            {/* </Form.Group> */}
 
-          <Button
-            variant="success"
-            type="submit"
-            className="btn mt-3"
-            onClick={handleSubmit}
-          >
-            Sign Up
-          </Button>
-
-          {/* <Form.Group controlId="formBasicPassword" className="mt-2">
-            <p>
-              Do you have account? <NavLink to="/Login">Login</NavLink>
-            </p>
-          </Form.Group> */}
-        </Form>
-      </FormContainer>
+            <Button
+              variant="success"
+              type="submit"
+              className="btn mt-3"
+              onClick={handleSubmit}
+            >
+              Sign Up
+            </Button>
+            <Button
+              variant="success"
+              type="submit"
+              className="btn mt-3 mx-2"
+              onClick={handleLogin}
+            >
+              Login
+            </Button>
+          </Form>
+        </FormContainer>
+      ) : (
+        <Login2 />
+      )}
     </>
   );
 }

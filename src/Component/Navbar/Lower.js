@@ -10,33 +10,33 @@ import { app } from "../../utilities/firebase";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Signup2 from "../Signup2";
 import Login2 from "../Login2";
+import Signup2 from "../Signup2";
 
-export default function Lower(props) {
+export default function Lower() {
   const [click, setClick] = useState(true);
   const [page, setpage] = useState("menu");
   const navigate = useNavigate();
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
-  const handleGoogleSignIn = async () => {
-    signInWithPopup(auth, provider)
-      .then(async (res) => {
-        console.log("res: ", res);
-        if (auth.currentUser) {
-          navigate("/chat");
-        }
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
-  };
+  // const handleGoogleSignIn = async () => {
+  //   signInWithPopup(auth, provider)
+  //     .then(async (res) => {
+  //       console.log("res: ", res);
+  //       if (auth.currentUser) {
+  //         navigate("/chat");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       toast.error(error);
+  //     });
+  // };
 
-  const handleSignUp = () => {
-    setClick(false);
-    setpage("signup");
-  };
+  // const handleSignUp = () => {
+  //   setClick(false);
+  //   setpage("signup");
+  // };
 
   const handleLogin = () => {
     setClick(false);
@@ -73,11 +73,6 @@ export default function Lower(props) {
               {click ? (
                 <Right>
                   <Code>
-                    {/* <Button onClick={handleGoogleSignIn}>
-                      Sign In With Google
-                    </Button>
-                    <br /> */}
-
                     <Button
                       onClick={handleLogin}
                       style={{
@@ -87,9 +82,6 @@ export default function Lower(props) {
                     >
                       SignIn With Email password
                     </Button>
-
-                    {/* <br />
-                    <Button onClick={handleLogin}>Login</Button> */}
                   </Code>
                 </Right>
               ) : (
@@ -104,8 +96,10 @@ export default function Lower(props) {
                     >
                       Sign In With Email password
                     </Button>
-                    {page === "signup" && <Signup2 />}
-                    <SideLogin>{page === "login" && <Login2 />}</SideLogin>
+                    {/* {page === "signup" && <Signup2 />} */}
+                    <SideLogin>
+                      <Signup2 />
+                    </SideLogin>
                   </SideRight>
                 </>
               )}

@@ -3,17 +3,22 @@ import styled from "styled-components";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useState, useEffect } from "react";
 import { app } from "../utilities/firebase";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Circles } from "react-loader-spinner";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Login2() {
   const [isLoading, setIsLoading] = useState(false);
+  const [initialLogin, setIntialLogin] = useState(true);
   const navigate = useNavigate();
+  // const location = useLocation();
+  // const { search } = location;
   const auth = getAuth(app);
+  const [user] = useAuthState(auth);
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -23,7 +28,36 @@ export default function Login2() {
     setValues({ ...values, [e.target.name]: e.target.value });
   }
 
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/chat");
+  //     toast.success("Welcome to the chat app!");
+  //   } else {
+  //     if (isSignInWithEmailLink(auth, window.location.href)) {
+  //       let email = window.localStorage.getItem("emailForSignIn");
+  //       if (!email) {
+  //         email = window.prompt("Please provide your email for confirmation");
+  //       }
+  //       setIntialLogin(true);
+  //       signInWithEmailLink(auth, email, window.location.href)
+  //         .then(() => {
+  //           window.localStorage.removeItem("emailForSignIn");
+  //           setIntialLogin(false);
+  //           navigate("/chat");
+  //           toast.success("Welcome to the chat app!");
+  //         })
+  //         .catch((error) => {
+  //           setIntialLogin(false);
+  //           toast.error(error.message);
+  //           navigate("/");
+  //         });
+  //       console.log("signInWithEmailLink: ", signInWithEmailLink);
+  //     }
+  //   }
+  // }, [user, navigate]);
+
   const handleSubmit = async (e) => {
+    console.log("handleSubmit: ", handleSubmit);
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
@@ -32,20 +66,47 @@ export default function Login2() {
 
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(async () => {
-        toast.success("welcome to chat app");
-
+        console.log("welcome");
         if (signInWithEmailAndPassword) {
           navigate("/chat");
         }
       })
       .catch((error) => {
-        toast.error("opps! somthing is wrong");
+        alert(error);
       });
+
+    //   const actionCodeSettings = {
+    //     url: "http://localhost:3000",
+    //     handleCodeInApp: true,
+    //   };
+    //   console.log("actionCodeSettings: ", actionCodeSettings);
+
+    //   sendSignInLinkToEmail(auth, values.email, actionCodeSettings)
+    //     .then(() => {
+    //       localStorage.setItem("emailForSignIn", values.email);
+    //       toast.success(
+    //         "Email has been sent. Please check your inbox to sign in."
+    //       );
+    //     })
+    //     .catch((error) => {
+    //       toast.error("Oops! Something went wrong.");
+    //     });
+    //   console.log("sendSignInLinkToEmail: ", sendSignInLinkToEmail);
+
+    // signInWithEmailAndPassword(auth, values.email, values.password)
+    //   .then(async () => {
+    //     if (signInWithEmailAndPassword) {
+    //       navigate("/chat");
+    //       toast.success("welcome to chat app");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     toast.error("opps! somthing is wrong");
+    //   });
   };
+
   return (
     <>
-      {/* <ToastContainer /> */}
-
       <FormContainer>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
@@ -95,12 +156,6 @@ export default function Login2() {
               Login
             </Button>
           )}
-
-          {/* <Form.Group controlId="formBasicPassword" className="mt-2">
-            <p>
-              Do you have account? <NavLink to="/signup">SignUp</NavLink>
-            </p>
-          </Form.Group> */}
         </Form>
       </FormContainer>
     </>
