@@ -10,16 +10,26 @@ import { AuthContext } from "../Context/AuthContext";
 
 function Router() {
   const { currentuser } = useContext(AuthContext);
+  console.log("currentuser: ", currentuser);
 
   const ProtectedRoute = ({ children }) => {
-    if (currentuser) {
+    if (!currentuser) {
       return <Navigate to="/" />;
     }
+    return children;
   };
+
   return (
     <Routes>
       <Route path="/" element={<Header />} />
-      <Route path="/chat" element={<Chat />} />
+      <Route
+        path="/chat"
+        element={
+          <ProtectedRoute>
+            <Chat />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<Error />} />

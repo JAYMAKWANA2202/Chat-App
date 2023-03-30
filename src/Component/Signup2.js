@@ -32,10 +32,9 @@ export default function Signup() {
   const db = getFirestore(app);
   const storage = getStorage(app);
   const [values, setValues] = useState({
-    fullname: "",
+    displayName: "",
     email: "",
     password: "",
-    file: null,
   });
 
   const [errors, setErrors] = useState({});
@@ -53,7 +52,14 @@ export default function Signup() {
     setErrors(Validation2(values));
 
     if (Object.keys(errors).length === 0) {
-      logInWithEmailAndPassword(values.email, values.password, values.fullname);
+      logInWithEmailAndPassword(
+        values.email,
+        values.password,
+        values.displayName
+      );
+      await updateProfile(auth.currentUser, {
+        displayName: values.displayName,
+      });
     }
   };
 
@@ -64,21 +70,11 @@ export default function Signup() {
   useEffect(() => {
     if (
       Object.keys(errors).length === 0 &&
-      values.fullname !== "" &&
+      values.displayName !== "" &&
       values.email !== "" &&
       values.password !== "" &&
       values.file !== ""
     ) {
-      // toast.success("Your Form is Submitted", {
-      //   position: "top-right",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      // });
     }
   }, [errors]);
 
@@ -91,14 +87,14 @@ export default function Signup() {
               <Form.Label className="my-2 ">Name:</Form.Label>
               <Form.Control
                 type="text"
-                name="fullname"
+                name="displayName"
                 onChange={handleChange}
                 placeholder="Enter Name"
-                value={values.fullname}
+                value={values.displayName}
                 autoComplete="off"
               />
-              {errors.fullname && (
-                <p style={{ color: "red" }}>{errors.fullname}</p>
+              {errors.displayName && (
+                <p style={{ color: "red" }}>{errors.displayName}</p>
               )}
             </Form.Group>
 

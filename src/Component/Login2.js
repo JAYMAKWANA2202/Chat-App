@@ -20,6 +20,7 @@ export default function Login2() {
   const auth = getAuth(app);
   const [user] = useAuthState(auth);
   const [values, setValues] = useState({
+    displayName: "",
     email: "",
     password: "",
   });
@@ -57,14 +58,18 @@ export default function Login2() {
   // }, [user, navigate]);
 
   const handleSubmit = async (e) => {
-    console.log("handleSubmit: ", handleSubmit);
     e.preventDefault();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
     }, 3500);
 
-    signInWithEmailAndPassword(auth, values.email, values.password)
+    signInWithEmailAndPassword(
+      auth,
+      values.email,
+      values.password,
+      values.displayName
+    )
       .then(async () => {
         if (signInWithEmailAndPassword) {
           navigate("/chat");

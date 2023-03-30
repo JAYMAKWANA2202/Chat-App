@@ -23,18 +23,17 @@ export const db = getFirestore(app);
 export const provider = new GoogleAuthProvider();
 export const storage = getStorage();
 
-export const logInWithEmailAndPassword = async (email, password, fullname) => {
+export const logInWithEmailAndPassword = async (email, password) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password).then(
       async (res) => {
         const ref = doc(db, "user", res.user.uid);
-        const docref = await setDoc(ref, { fullname, email, password });
-        const ref1 = doc(db, "userChat", res.user.uid);
-        const docref1 = await setDoc(ref1, {});
+        const docref = await setDoc(ref, { email, password });
+        await setDoc(doc(db, "userChat", res.user.uid), {});
       }
     );
 
-    toast.success("Form is submmited in data base ");
+    toast.success("Form is submmited  ");
   } catch (err) {
     toast.error(err.message);
   }

@@ -8,8 +8,18 @@ import { auth } from "../utilities/firebase";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { db } from "../utilities/firebase";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { toast } from "react-toastify";
+import Chat from "./Chat";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  setDoc,
+  doc,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../../src/Context/AuthContext";
 
@@ -28,14 +38,17 @@ export default function Sidbar() {
   };
 
   const handelSearch = async () => {
-    const q = query(collection(db, "user"), where("fullname", "==", username));
+    const q = query(
+      collection(db, "user"),
+      where("displayName", "==", username)
+    );
     try {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
       });
     } catch (err) {
-      setErr(toast.error(true));
+      setErr("user not found!");
     }
   };
 
@@ -43,13 +56,48 @@ export default function Sidbar() {
     e.code === "Enter" && handelSearch();
   };
 
+  const handleSelect = async () => {
+    //check whether the group(chats in firestore) exists, if not create
+    const combinedId =
+      currentuser.uid > user.uid
+        ? currentuser.uid + user.uid
+        : user.uid + currentuser.uid;
+    try {
+      const res = await getDoc(doc(db, "chats", combinedId));
+
+      if (!res.exists()) {
+        //create a chat in chats collection
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
+
+        //create user chats
+        await updateDoc(doc(db, "userChat", currentuser.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+
+        await updateDoc(doc(db, "userChat", user.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: currentuser.uid,
+            displayName: currentuser.displayName,
+            email: currentuser.email,
+          },
+          [combinedId + ".date"]: serverTimestamp(),
+        });
+      }
+    } catch (err) {}
+  };
+
   return (
     <Container>
       <Header>
         <img src={Myimg1} height={30} />
-        <span>{currentuser.fullname}</span>
+        <span>{currentuser.email}</span>
         <IconButton>
-          <Button onClick={handelLogout} className="w-100 ">
+          <Button onClick={handelLogout} className=" w-100 ">
             Logout
           </Button>
         </IconButton>
@@ -60,12 +108,11 @@ export default function Sidbar() {
           onKeyDown={handelKey}
           onChange={(e) => setUsername(e.target.value)}
         />
-
         {/* <ChatInfo>
           {user && (
             <Chats>
               <img src={Myimg} height={40} />
-              <span>{user.fullname}</span>
+              <span>{user.displayName}</span>
             </Chats>
           )}
         </ChatInfo> */}
@@ -73,24 +120,17 @@ export default function Sidbar() {
 
       <UserChat>
         {user && (
-          <Chats>
+          <Chats
+            className="userChat"
+            style={{ borderBottom: "1px solid gray" }}
+            onClick={handleSelect}
+          >
             <img src={Myimg} height={40} />
-            <span>{user.fullname}</span>
+            <span>{user.displayName}</span>
           </Chats>
         )}
         {err && <span>User not found!</span>}
-        <Chats>
-          <img src={Myimg} height={40} />
-          <span>raj nariya </span>
-        </Chats>
-        <Chats>
-          <img src={Myimg} height={40} />
-          <span>kunj kaneriya</span>
-        </Chats>
-        <Chats>
-          <img src={Myimg} height={40} />
-          <span>het makwana</span>
-        </Chats>
+        <Chat />
       </UserChat>
     </Container>
   );
