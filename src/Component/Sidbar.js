@@ -19,7 +19,7 @@ import {
   doc,
   updateDoc,
   serverTimestamp,
-  addDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../../src/Context/AuthContext";
@@ -29,7 +29,6 @@ export default function Sidbar() {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(null);
-
   const Navigate = useNavigate();
 
   const handelLogout = () => {
@@ -90,7 +89,7 @@ export default function Sidbar() {
       }
     } catch (err) {}
 
-    // setUser(null);
+    setUser(null);
     setUsername("");
   };
 
@@ -123,21 +122,10 @@ export default function Sidbar() {
           >
             <img src={Myimg} height={40} />
             <span>{user.displayName}</span>
-            <p>Hello</p>
           </Chats>
         )}
         {err && <span>User not found!</span>}
 
-        <Chats className="Chats">
-          <img src={Myimg} height={40} />
-          <span>kunj mkawana</span>
-          <p>Hello</p>
-        </Chats>
-        <Chats className="Chats">
-          <img src={Myimg} height={40} />
-          <span>kunj mkawana</span>
-          <p>Hello</p>
-        </Chats>
         <Chat />
       </UserChat>
     </Container>

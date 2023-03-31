@@ -11,8 +11,8 @@ export default function Chat() {
 
   useEffect(() => {
     const GetChats = () => {
-      const unsub = onSnapshot(doc(db, "chats", currentuser.uid), (doc) => {
-        setChat();
+      const unsub = onSnapshot(doc(db, "userChat", currentuser.uid), (doc) => {
+        setChat(doc.data());
       });
       return () => {
         unsub();
@@ -20,32 +20,42 @@ export default function Chat() {
     };
     currentuser.uid && GetChats();
   }, [currentuser]);
+  console.log(Object.entries(chat));
   return (
     <>
-      <ChatInfo>
-        <Chats>
+      {Object.entries(chat)?.map((chat) => (
+        <Chats key={chat[0]}>
           <img src={Myimg} height={40} />
-          <span>sdc</span>
+          <span>{chat[1].userInfo.displayName} </span>
+          <p>{chat[1].userInfo.lastmessage?.text}</p>
         </Chats>
-      </ChatInfo>
+      ))}
     </>
   );
 }
 
-const ChatInfo = styled.div``;
 const Chats = styled.div`
-  padding: 9px;
-  display: flex;
+  padding: 10px;
+  height: 80px;
   border-bottom: 1px solid gray;
   cursor: pointer;
   width: 100%;
 
   img {
     border-radius: 50%;
+    width: 45px;
+    height: 45px;
   }
 
   span {
     margin-left: 15px;
+    font-size: 18px;
+  }
+  p {
+    display: flex;
+    flex-direction: column;
+    margin-left: 65px;
+    margin-top: -10px;
   }
 
   :hover {
