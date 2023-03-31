@@ -43,7 +43,6 @@ export default function Sidbar() {
       collection(db, "user"),
       where("displayName", "==", username)
     );
-    console.log("collection: ", collection);
     try {
       const querySnapshot = await getDocs(q);
       console.log("querySnapshot: ", querySnapshot);
@@ -90,6 +89,9 @@ export default function Sidbar() {
         });
       }
     } catch (err) {}
+
+    // setUser(null);
+    setUsername("");
   };
 
   return (
@@ -108,15 +110,8 @@ export default function Sidbar() {
           placeholder="search chat"
           onKeyDown={handelKey}
           onChange={(e) => setUsername(e.target.value)}
+          value={username}
         />
-        {/* <ChatInfo>
-          {user && (
-            <Chats>
-              <img src={Myimg} height={40} />
-              <span>{user.displayName}</span>
-            </Chats>
-          )}
-        </ChatInfo> */}
       </Search>
 
       <UserChat>
@@ -128,9 +123,21 @@ export default function Sidbar() {
           >
             <img src={Myimg} height={40} />
             <span>{user.displayName}</span>
+            <p>Hello</p>
           </Chats>
         )}
         {err && <span>User not found!</span>}
+
+        <Chats className="Chats">
+          <img src={Myimg} height={40} />
+          <span>kunj mkawana</span>
+          <p>Hello</p>
+        </Chats>
+        <Chats className="Chats">
+          <img src={Myimg} height={40} />
+          <span>kunj mkawana</span>
+          <p>Hello</p>
+        </Chats>
         <Chat />
       </UserChat>
     </Container>
@@ -208,7 +215,6 @@ const UserChat = styled.div`
   color: white;
   height: 547px;
   overflow: scroll;
-  /* display: flex; */
 
   img {
     border-radius: 50%;
@@ -217,9 +223,10 @@ const UserChat = styled.div`
 
 const Chats = styled.div`
   padding: 9px;
-  display: flex;
-  /* margin-top: 15px; */
-  /* border-bottom: 1px solid gray; */
+  /* display: flex; */
+  /* margin-top: 10px; */
+  height: 80px;
+  border-bottom: 1px solid gray;
   cursor: pointer;
   width: 100%;
 
@@ -229,6 +236,14 @@ const Chats = styled.div`
 
   span {
     margin-left: 15px;
+    font-size: 18px;
+  }
+  p {
+    display: flex;
+    flex-direction: column;
+    margin-left: 60px;
+    margin-top: -7px;
+    font-size: 15px;
   }
 
   :hover {

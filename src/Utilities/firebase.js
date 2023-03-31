@@ -41,10 +41,6 @@ export const logInWithEmailAndPassword = async (
       await setDoc(doc(db, "userChat", uid), {});
     });
 
-    console.log(
-      "createUserWithEmailAndPassword: ",
-      createUserWithEmailAndPassword
-    );
     toast.success("Form is submmited  ");
   } catch (err) {
     toast.error(err.message);
