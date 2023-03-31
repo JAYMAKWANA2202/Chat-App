@@ -57,9 +57,9 @@ export default function Signup() {
         values.password,
         values.displayName
       );
-      await updateProfile(auth.currentUser, {
-        displayName: values.displayName,
-      });
+      // await updateProfile(auth.currentUser, {
+      //   displayName: values.displayName,
+      // });
     }
   };
 

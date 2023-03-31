@@ -23,16 +23,28 @@ export const db = getFirestore(app);
 export const provider = new GoogleAuthProvider();
 export const storage = getStorage();
 
-export const logInWithEmailAndPassword = async (email, password) => {
+export const logInWithEmailAndPassword = async (
+  email,
+  password,
+  displayName
+) => {
   try {
-    await createUserWithEmailAndPassword(auth, email, password).then(
-      async (res) => {
-        const ref = doc(db, "user", res.user.uid);
-        const docref = await setDoc(ref, { email, password });
-        await setDoc(doc(db, "userChat", res.user.uid), {});
-      }
-    );
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+      displayName
+    ).then(async (res) => {
+      const uid = res.user.uid;
+      const ref = doc(db, "user", uid);
+      const docref = await setDoc(ref, { email, password, displayName, uid });
+      await setDoc(doc(db, "userChat", uid), {});
+    });
 
+    console.log(
+      "createUserWithEmailAndPassword: ",
+      createUserWithEmailAndPassword
+    );
     toast.success("Form is submmited  ");
   } catch (err) {
     toast.error(err.message);

@@ -19,6 +19,7 @@ import {
   doc,
   updateDoc,
   serverTimestamp,
+  addDoc,
 } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../../src/Context/AuthContext";
@@ -42,10 +43,13 @@ export default function Sidbar() {
       collection(db, "user"),
       where("displayName", "==", username)
     );
+    console.log("collection: ", collection);
     try {
       const querySnapshot = await getDocs(q);
+      console.log("querySnapshot: ", querySnapshot);
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
+        console.log("setUser: ", setUser);
       });
     } catch (err) {
       setErr("user not found!");
@@ -64,11 +68,9 @@ export default function Sidbar() {
         : user.uid + currentuser.uid;
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
-
       if (!res.exists()) {
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
-
         //create user chats
         await updateDoc(doc(db, "userChat", currentuser.uid), {
           [combinedId + ".userInfo"]: {
@@ -78,7 +80,6 @@ export default function Sidbar() {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
-
         await updateDoc(doc(db, "userChat", user.uid), {
           [combinedId + ".userInfo"]: {
             uid: currentuser.uid,

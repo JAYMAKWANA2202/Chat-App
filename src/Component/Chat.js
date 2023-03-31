@@ -7,15 +7,7 @@ export default function Chat() {
     <>
       <Chats>
         <img src={Myimg} height={40} />
-        <span>jay makwana</span>
-      </Chats>
-      <Chats>
-        <img src={Myimg} height={40} />
-        <span>jay makwana</span>
-      </Chats>
-      <Chats>
-        <img src={Myimg} height={40} />
-        <span>jay makwana</span>
+        <span>sdc</span>
       </Chats>
     </>
   );
@@ -24,7 +16,6 @@ export default function Chat() {
 const Chats = styled.div`
   padding: 9px;
   display: flex;
-  /* margin-top: 15px; */
   border-bottom: 1px solid gray;
   cursor: pointer;
   width: 100%;
