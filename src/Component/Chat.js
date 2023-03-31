@@ -27,7 +27,7 @@ export default function Chat() {
         <Chats key={chat[0]}>
           <img src={Myimg} height={40} />
           <span>{chat[1].userInfo.displayName} </span>
-          <p>{chat[1].userInfo.lastmessage?.text}</p>
+          <p>{chat[1].userInfo.lastmessage?.text}hjdh</p>
         </Chats>
       ))}
     </>
@@ -60,5 +60,24 @@ const Chats = styled.div`
 
   :hover {
     background-color: #0b141a;
+  }
+  @media (max-width: 768px) {
+    height: 60px;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      margin-left: 10px;
+      font-size: 10px;
+    }
+
+    p {
+      margin-left: 45px;
+      margin-top: -5px;
+      font-size: 10px;
+    }
   }
 `;
