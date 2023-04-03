@@ -4,10 +4,12 @@ import styled from "styled-components";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../utilities/firebase";
 import { AuthContext } from "../Context/AuthContext";
+import { ChatContext } from "../Context/ChatContext";
 
 export default function Chat() {
   const [chat, setChat] = useState([]);
   const { currentuser } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
 
   useEffect(() => {
     const GetChats = () => {
@@ -20,14 +22,18 @@ export default function Chat() {
     };
     currentuser.uid && GetChats();
   }, [currentuser]);
-  console.log(Object.entries(chat));
+
+  const handleSelect = (u) => {
+    dispatch({ type: "CHANGE_USER", payload: u });
+  };
+
   return (
     <>
       {Object.entries(chat)?.map((chat) => (
-        <Chats key={chat[0]}>
+        <Chats key={chat[0]} onClick={() => handleSelect(chat[1].userInfo)}>
           <img src={Myimg} height={40} />
           <span>{chat[1].userInfo.displayName} </span>
-          <p>{chat[1].userInfo.lastmessage?.text}hjdh</p>
+          <p>{chat[1].userInfo.lastmessage?.text}</p>
         </Chats>
       ))}
     </>
