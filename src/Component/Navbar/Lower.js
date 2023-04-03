@@ -18,20 +18,6 @@ export default function Lower() {
   const [page, setpage] = useState("menu");
   const navigate = useNavigate();
   const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-
-  // const handleGoogleSignIn = async () => {
-  //   signInWithPopup(auth, provider)
-  //     .then(async (res) => {
-  //       console.log("res: ", res);
-  //       if (auth.currentUser) {
-  //         navigate("/chat");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error);
-  //     });
-  // };
 
   // const handleSignUp = () => {
   //   setClick(false);

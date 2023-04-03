@@ -33,7 +33,7 @@ export default function Chat() {
         <Chats key={chat[0]} onClick={() => handleSelect(chat[1].userInfo)}>
           <img src={Myimg} height={40} />
           <span>{chat[1].userInfo.displayName} </span>
-          <p>{chat[1].userInfo.lastmessage?.text}</p>
+          <p>{chat[1].lastMessage?.text}</p>
         </Chats>
       ))}
     </>
@@ -62,6 +62,7 @@ const Chats = styled.div`
     flex-direction: column;
     margin-left: 65px;
     margin-top: -10px;
+    fon
   }
 
   :hover {
@@ -84,6 +85,7 @@ const Chats = styled.div`
       margin-left: 45px;
       margin-top: -5px;
       font-size: 10px;
+
     }
   }
 `;

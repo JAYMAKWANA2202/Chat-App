@@ -4,8 +4,17 @@ import { TiAttachment } from "react-icons/ti";
 import { ChatContext } from "../Context/ChatContext";
 import { AuthContext } from "../Context/AuthContext";
 import { useState } from "react";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { db } from "../utilities/firebase";
+import {
+  Timestamp,
+  arrayUnion,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
+import { db, storage } from "../utilities/firebase";
+import { v4 as uuid } from "uuid";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { toast } from "react-toastify";
 
 export default function Inputbar() {
   const [text, setText] = useState("");
@@ -15,13 +24,54 @@ export default function Inputbar() {
 
   const handleSend = async () => {
     if (img) {
+      const storageRef = ref(storage, uuid());
+      const uploadTask = await uploadBytesResumable(storageRef, img);
+
+      uploadTask.on(
+        (error) => {
+          toast.error(error.message);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            await updateDoc(doc(db, "chats", data.chatId), {
+              messages: arrayUnion({
+                id: uuid(),
+                text,
+                senderId: currentuser.uid,
+                date: Timestamp.now(),
+                img: downloadURL,
+              }),
+            });
+          });
+        }
+      );
     } else {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
-          id:
-        })
+          id: uuid(),
+          text,
+          senderId: currentuser.uid,
+          date: Timestamp.now(),
+        }),
       });
     }
+
+    await updateDoc(doc(db, "userChat", currentuser.uid), {
+      [data.chatId + ".lastMessage"]: {
+        text,
+      },
+      [data.chatId + ".data"]: serverTimestamp(),
+    });
+
+    await updateDoc(doc(db, "userChat", data.user.uid), {
+      [data.chatId + ".lastMessage"]: {
+        text,
+      },
+      [data.chatId + ".data"]: serverTimestamp(),
+    });
+
+    setText("");
+    setImg(null);
   };
 
   return (
