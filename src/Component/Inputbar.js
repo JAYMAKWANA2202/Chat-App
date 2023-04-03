@@ -81,6 +81,7 @@ export default function Inputbar() {
         className="input"
         placeholder="Type Something....."
         onChange={(e) => setText(e.target.value)}
+        value={text}
       />
       <Share>
         <input
