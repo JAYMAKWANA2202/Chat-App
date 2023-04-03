@@ -33,7 +33,7 @@ export default function Chat() {
         ?.sort((a, b) => b[1].date - a[1].date)
         .map((chat) => (
           <Chats key={chat[0]} onClick={() => handleSelect(chat[1].userInfo)}>
-            <img src={Myimg} height={40} />
+            <img src={Myimg} height={40} alt="" />
             <span>{chat[1].userInfo.displayName} </span>
             <p>{chat[1].lastMessage?.text}</p>
           </Chats>

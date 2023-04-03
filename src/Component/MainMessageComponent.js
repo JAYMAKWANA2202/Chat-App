@@ -4,34 +4,43 @@ import Myimg from "../images/1.jpg";
 import { AuthContext } from "../Context/AuthContext";
 import { ChatContext } from "../Context/ChatContext";
 
-export default function Message({ message }) {
+export default function MainMessageComponent({ message }) {
+  console.log("jay: ", message);
   const { currentuser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
   return (
-    <Container className="owner">
+    <Messagess
+      className={`Messagess ${
+        message?.senderId === currentuser.uid && "owner"
+      }`}
+    >
       <MessageInfo>
-        {/* here photo is remaing */}
-        <img src={Myimg} height={30} />
+        <img
+          src={
+            message?.senderId === currentuser.uid
+              ? Myimg
+              : data.user.uid && Myimg
+          }
+          alt=""
+          height={30}
+        />
         <span>just now</span>
       </MessageInfo>
       <MessageContent>
-        <p>hello</p>
-        <img
-          src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80"
-          alt=""
-        />
+        <p>{message?.text}</p>
+        {message?.img && <img src={message?.img} alt="" />}
       </MessageContent>
-    </Container>
+    </Messagess>
   );
 }
 
-const Container = styled.div`
+const Messagess = styled.div`
   display: flex;
 
   &.owner {
     flex-direction: row-reverse;
-    /* align-items: flex-start; */
+    align-items: flex-start;
     gap: 10px;
 
     p {

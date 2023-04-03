@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { CiMenuKebab } from "react-icons/ci";
 import Myimg from "../images/1.jpg";
 import Inputbar from "./Inputbar";
-import Messages from "./Messages";
+import MessagesContainer from "./MessagesContainer";
 import { ChatContext } from "../Context/ChatContext";
 import { useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
@@ -16,6 +16,11 @@ export default function Chatbar() {
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
+      // pending :  true
+      // fulll : false
+      // reject : false
+
+      // error handeing
     });
     return () => {
       unSub();
@@ -25,7 +30,8 @@ export default function Chatbar() {
     <Container>
       <Detail>
         <UserLogo>
-          <img src={Myimg} height={40} />
+          <img src={Myimg} height={40} alt="abc" />
+
           <span>{data.user?.displayName}</span>
         </UserLogo>
         <Right>
@@ -34,9 +40,12 @@ export default function Chatbar() {
       </Detail>
 
       <ChatBox>
-        {messages.map((m) => (
-          <Messages messages={m} key={m.id} />
-        ))}
+        {messages &&
+          messages?.map((m, i) => (
+            <React.Fragment key={i}>
+              <MessagesContainer messages={m} key={m?.id} />
+            </React.Fragment>
+          ))}
       </ChatBox>
 
       <Inputbar />
