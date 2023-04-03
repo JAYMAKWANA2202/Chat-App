@@ -53,13 +53,13 @@ export default function Signup() {
 
     if (Object.keys(errors).length === 0) {
       logInWithEmailAndPassword(
+        values.displayName,
         values.email,
-        values.password,
-        values.displayName
+        values.password
       );
-      // await updateProfile(auth.currentUser, {
-      //   displayName: values.displayName,
-      // });
+      await updateProfile(auth.currentUser, {
+        displayName: values.displayName,
+      });
     }
   };
 

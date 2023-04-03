@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Myimg from "../images/1.jpg";
+import { AuthContext } from "../Context/AuthContext";
+import { ChatContext } from "../Context/ChatContext";
 
-export default function Message() {
+export default function Message({ message }) {
+  const { currentuser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
+
   return (
     <Container className="owner">
       <MessageInfo>

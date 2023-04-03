@@ -1,18 +1,51 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-
-import Form from "react-bootstrap/Form";
-import { TiAttachment, TiArrowForward } from "react-icons/ti";
-import { CiMenuKebab } from "react-icons/ci";
+import { TiAttachment } from "react-icons/ti";
+import { ChatContext } from "../Context/ChatContext";
+import { AuthContext } from "../Context/AuthContext";
+import { useState } from "react";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { db } from "../utilities/firebase";
 
 export default function Inputbar() {
+  const [text, setText] = useState("");
+  const [img, setImg] = useState(null);
+  const { currentuser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
+
+  const handleSend = async () => {
+    if (img) {
+    } else {
+      await updateDoc(doc(db, "chats", data.chatId), {
+        messages: arrayUnion({
+          id:
+        })
+      });
+    }
+  };
+
   return (
     <Container>
-      <input type="text" className="input" placeholder="Type Something....." />
+      <input
+        type="text"
+        className="input"
+        placeholder="Type Something....."
+        onChange={(e) => setText(e.target.value)}
+      />
       <Share>
-        <TiAttachment style={{ fontSize: "30px", color: "white" }} />
+        <input
+          type="file"
+          style={{ display: "none" }}
+          id="file"
+          onChange={(e) => setImg(e.target.files[0])}
+        />
+        <label htmlFor="file">
+          <TiAttachment
+            style={{ fontSize: "30px", color: "white", cursor: "pointer" }}
+          />
+        </label>
 
-        <button>Send</button>
+        <button onClick={handleSend}>Send</button>
       </Share>
     </Container>
   );
