@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { formatDistanceToNow } from "date-fns";
 import styled from "styled-components";
 import { TiAttachment } from "react-icons/ti";
 import { ChatContext } from "../Context/ChatContext";
@@ -23,6 +24,8 @@ export default function Inputbar() {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
+    const timestamp = Timestamp.now();
+
     if (img) {
       const storageRef = ref(storage, uuid());
       const uploadTask = await uploadBytesResumable(storageRef, img);
@@ -38,7 +41,7 @@ export default function Inputbar() {
                 id: uuid(),
                 text,
                 senderId: currentuser.uid,
-                date: Timestamp.now(),
+                date: timestamp,
                 img: downloadURL,
               }),
             });
@@ -51,7 +54,7 @@ export default function Inputbar() {
           id: uuid(),
           text,
           senderId: currentuser.uid,
-          date: Timestamp.now(),
+          date: timestamp,
         }),
       });
     }
@@ -59,6 +62,9 @@ export default function Inputbar() {
     await updateDoc(doc(db, "userChat", currentuser.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
+        time: formatDistanceToNow(new Date(timestamp.toMillis()), {
+          addSuffix: true,
+        }),
       },
       [data.chatId + ".data"]: serverTimestamp(),
     });
@@ -66,6 +72,9 @@ export default function Inputbar() {
     await updateDoc(doc(db, "userChat", data.user.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
+        time: formatDistanceToNow(new Date(timestamp.toMillis()), {
+          addSuffix: true,
+        }),
       },
       [data.chatId + ".data"]: serverTimestamp(),
     });
@@ -89,6 +98,7 @@ export default function Inputbar() {
           style={{ display: "none" }}
           id="file"
           onChange={(e) => setImg(e.target.files[0])}
+          // onKeyDown={handlePress}
         />
         <label htmlFor="file">
           <TiAttachment

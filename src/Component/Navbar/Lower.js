@@ -5,12 +5,11 @@ import Form from "react-bootstrap/Form";
 import { Gear, ThreeDotsVertical } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { app } from "../../utilities/firebase";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Login2 from "../Login2";
 import Signup2 from "../Signup2";
 
 export default function Lower() {
@@ -18,11 +17,6 @@ export default function Lower() {
   const [page, setpage] = useState("menu");
   const navigate = useNavigate();
   const auth = getAuth(app);
-
-  // const handleSignUp = () => {
-  //   setClick(false);
-  //   setpage("signup");
-  // };
 
   const handleLogin = () => {
     setClick(false);

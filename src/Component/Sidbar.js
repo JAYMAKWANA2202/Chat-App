@@ -19,7 +19,6 @@ import {
   doc,
   updateDoc,
   serverTimestamp,
-  onSnapshot,
 } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../../src/Context/AuthContext";

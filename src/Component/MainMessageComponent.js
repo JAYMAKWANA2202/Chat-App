@@ -1,16 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { formatDistanceToNow } from "date-fns";
 import styled from "styled-components";
 import Myimg from "../images/1.jpg";
 import { AuthContext } from "../Context/AuthContext";
 import { ChatContext } from "../Context/ChatContext";
+import { useRef } from "react";
 
 export default function MainMessageComponent({ message }) {
-  console.log("jay: ", message);
   const { currentuser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
+  const ref = useRef();
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
 
   return (
     <Messagess
+      ref={ref}
       className={`Messagess ${
         message?.senderId === currentuser.uid && "owner"
       }`}
@@ -25,7 +32,11 @@ export default function MainMessageComponent({ message }) {
           alt=""
           height={30}
         />
-        <span>just now</span>
+        <span>
+          {formatDistanceToNow(new Date(message.date.toMillis()), {
+            addSuffix: true,
+          })}
+        </span>
       </MessageInfo>
       <MessageContent>
         <p>{message?.text}</p>
@@ -67,6 +78,10 @@ const MessageInfo = styled.div`
     border-radius: 50%;
     width: 40px;
     height: 40px;
+  }
+  span {
+    /* margin-top: 10px;
+    width: 50px; */
   }
 `;
 

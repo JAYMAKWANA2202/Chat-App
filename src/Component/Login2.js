@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { app } from "../utilities/firebase";
 import { useNavigate } from "react-router-dom";
 import { Circles } from "react-loader-spinner";
@@ -13,12 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Login2() {
   const [isLoading, setIsLoading] = useState(false);
-  const [initialLogin, setIntialLogin] = useState(true);
   const navigate = useNavigate();
-  // const location = useLocation();
-  // const { search } = location;
   const auth = getAuth(app);
-  const [user] = useAuthState(auth);
   const [values, setValues] = useState({
     displayName: "",
     email: "",
@@ -28,34 +24,6 @@ export default function Login2() {
   function handleChange(e) {
     setValues({ ...values, [e.target.name]: e.target.value });
   }
-
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate("/chat");
-  //     toast.success("Welcome to the chat app!");
-  //   } else {
-  //     if (isSignInWithEmailLink(auth, window.location.href)) {
-  //       let email = window.localStorage.getItem("emailForSignIn");
-  //       if (!email) {
-  //         email = window.prompt("Please provide your email for confirmation");
-  //       }
-  //       setIntialLogin(true);
-  //       signInWithEmailLink(auth, email, window.location.href)
-  //         .then(() => {
-  //           window.localStorage.removeItem("emailForSignIn");
-  //           setIntialLogin(false);
-  //           navigate("/chat");
-  //           toast.success("Welcome to the chat app!");
-  //         })
-  //         .catch((error) => {
-  //           setIntialLogin(false);
-  //           toast.error(error.message);
-  //           navigate("/");
-  //         });
-  //       console.log("signInWithEmailLink: ", signInWithEmailLink);
-  //     }
-  //   }
-  // }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,24 +47,6 @@ export default function Login2() {
       .catch((error) => {
         toast.error(error.message);
       });
-
-    //   const actionCodeSettings = {
-    //     url: "http://localhost:3000",
-    //     handleCodeInApp: true,
-    //   };
-    //   console.log("actionCodeSettings: ", actionCodeSettings);
-
-    //   sendSignInLinkToEmail(auth, values.email, actionCodeSettings)
-    //     .then(() => {
-    //       localStorage.setItem("emailForSignIn", values.email);
-    //       toast.success(
-    //         "Email has been sent. Please check your inbox to sign in."
-    //       );
-    //     })
-    //     .catch((error) => {
-    //       toast.error("Oops! Something went wrong.");
-    //     });
-    //   console.log("sendSignInLinkToEmail: ", sendSignInLinkToEmail);
   };
 
   return (
