@@ -96,7 +96,7 @@ export default function Sidbar() {
   return (
     <Container>
       <Header>
-        <img src={Myimg1} height={30} />
+        <img src={Myimg1} height={30} alt="" />
         <span>{currentuser.email}</span>
         <IconButton>
           <Button onClick={handelLogout} className=" w-100 ">
@@ -120,8 +120,8 @@ export default function Sidbar() {
             style={{ borderBottom: "1px solid gray" }}
             onClick={handleSelect}
           >
-            <img src={Myimg} height={40} />
-            <span>{user.displayName}</span>
+            <img src={Myimg} height={40} alt="" />
+            <span>{user?.displayName}</span>
           </Chats>
         )}
         {err && <span>User not found!</span>}
