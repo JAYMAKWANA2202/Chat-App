@@ -98,7 +98,6 @@ export default function Inputbar() {
           style={{ display: "none" }}
           id="file"
           onChange={(e) => setImg(e.target.files[0])}
-          // onKeyDown={handlePress}
         />
         <label htmlFor="file">
           <TiAttachment
@@ -139,7 +138,6 @@ const Share = styled.div`
 
   button {
     border-radius: 5px;
-    /* background-color: gr; */
     border: none;
     outline: none;
   }

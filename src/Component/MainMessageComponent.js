@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { formatDistanceToNow } from "date-fns";
+import { format } from "date-fns";
 import styled from "styled-components";
 import Myimg from "../images/1.jpg";
 import { AuthContext } from "../Context/AuthContext";
@@ -32,10 +32,8 @@ export default function MainMessageComponent({ message }) {
           alt=""
           height={30}
         />
-        <span>
-          {formatDistanceToNow(new Date(message.date.toMillis()), {
-            addSuffix: true,
-          })}
+        <span style={{ marginTop: "10px" }}>
+          {format(new Date(message.date.toMillis()), "h:mm a")}
         </span>
       </MessageInfo>
       <MessageContent>
@@ -64,7 +62,7 @@ const Messagess = styled.div`
     }
 
     img {
-      border-radius: 15px;
+      border-radius: 50%;
     }
   }
 `;
@@ -78,10 +76,6 @@ const MessageInfo = styled.div`
     border-radius: 50%;
     width: 40px;
     height: 40px;
-  }
-  span {
-    /* margin-top: 10px;
-    width: 50px; */
   }
 `;
 
