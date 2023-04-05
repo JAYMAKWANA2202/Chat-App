@@ -51,8 +51,6 @@ const Container = styled.div`
   background-color: #0b141a;
   color: white;
   width: 75%;
-  /* text-align: center; */
-  /* height: auto; */
 `;
 
 const Detail = styled.div`
