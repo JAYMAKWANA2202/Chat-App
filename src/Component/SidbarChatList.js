@@ -11,6 +11,7 @@ export default function SidbarChatList() {
   const [chat, setChat] = useState([]);
   const { currentuser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
+  const [selectedChat, setSelectedChat] = useState(null);
 
   useEffect(() => {
     const GetChats = () => {
@@ -26,6 +27,7 @@ export default function SidbarChatList() {
 
   const handleSelect = (u) => {
     dispatch({ type: "CHANGE_USER", payload: u });
+    setSelectedChat(u.uid);
   };
 
   return (
@@ -33,11 +35,25 @@ export default function SidbarChatList() {
       {Object.entries(chat)
         ?.sort((a, b) => b[1].date - a[1].date)
         .map((chat) => (
-          <Chats key={chat[0]} onClick={() => handleSelect(chat[1].userInfo)}>
-            <img src={Myimg} height={40} alt="" />
-            <span>{chat[1].userInfo?.displayName} </span>
-            <p>{chat[1].lastMessage?.text}</p>
-          </Chats>
+          <>
+            <Chats
+              className="user"
+              key={chat[0]}
+              onClick={() => handleSelect(chat[1].userInfo)}
+              style={{
+                backgroundColor:
+                  selectedChat === chat[1].userInfo.uid ? "#2a3942" : "",
+              }}
+            >
+              <img src={Myimg} height={40} alt="" />
+              <span>{chat[1].userInfo?.displayName} </span>
+              <p>
+                {chat[1].lastMessage?.text
+                  ? chat[1].lastMessage.text.split(" ").slice(0, 5).join(" ")
+                  : ""}
+              </p>
+            </Chats>
+          </>
         ))}
     </>
   );
@@ -47,7 +63,6 @@ const Chats = styled.div`
   padding: 10px 12px;
   height: 80px;
   border-bottom: 1px solid #222d34;
-  /* background-image: url(${BackGroundImg}); */
 
   cursor: pointer;
   width: 100%;

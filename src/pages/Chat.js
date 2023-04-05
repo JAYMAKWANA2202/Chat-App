@@ -14,8 +14,8 @@ export default function Chat() {
 
 const Container = styled.div`
   display: flex;
-  padding: 15px;
-  /* background-color: #202c33; */
-  background-color: pink;
+  padding: 13px 8px;
+  background-color: #081116;
+  /* background-color: pink; */
   height: 100%;
 `;

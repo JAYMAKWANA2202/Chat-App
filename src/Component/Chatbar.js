@@ -9,6 +9,7 @@ import { useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../utilities/firebase";
 import BackGroundImg from "../../src/images/4.jpg";
+import _ from "lodash";
 
 export default function Chatbar() {
   const [messages, setMessages] = useState([]);
@@ -27,7 +28,7 @@ export default function Chatbar() {
       <Detail>
         <UserLogo>
           <img src={Myimg} height={40} alt="" />
-          <span>{data.user?.displayName}</span>
+          <span>{_.startCase(data.user?.displayName)}</span>
         </UserLogo>
         <Right>
           <CiMenuKebab />
@@ -55,7 +56,7 @@ const Container = styled.div`
 `;
 
 const Detail = styled.div`
-  height: 80px;
+  height: 60px;
   background-color: #202c33;
   display: flex;
   align-items: center;
@@ -86,7 +87,7 @@ const Right = styled.div`
 `;
 
 const ChatBox = styled.div`
-  height: 547px;
+  height: 570px;
   background-color: #0b141a;
   background-image: url(${BackGroundImg});
   overflow-y: scroll;

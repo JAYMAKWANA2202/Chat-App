@@ -22,7 +22,6 @@ import {
 } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../../src/Context/AuthContext";
-import { CiMenuKebab } from "react-icons/ci";
 import BackGroundImg from "../../src/images/4.jpg";
 
 export default function Sidbar() {
@@ -111,11 +110,11 @@ export default function Sidbar() {
 
       <Search>
         <SearchInput
-          placeholder="search chat"
+          placeholder="Search or start new chat"
           onKeyDown={handelKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
-        ></SearchInput>
+        />
       </Search>
 
       <UserChat>
@@ -171,12 +170,11 @@ const Search = styled.div`
   flex-direction: column;
   padding: 9px;
   z-index: 2;
-  /* background-color: #111b21; */
-  background-color: #fff;
+  background-color: #111b21;
   position: sticky;
   overflow: hidden;
-  top: 80px;
-  height: 55px;
+  top: 60px;
+  height: 60px;
 `;
 
 const SearchInput = styled.input`
@@ -189,6 +187,7 @@ const SearchInput = styled.input`
 
   ::placeholder {
     padding: 9px 12px;
+    color: #8696a0;
   }
 `;
 
@@ -208,7 +207,7 @@ const Header = styled.div`
   z-index: 1;
   align-items: center;
   padding: 15px;
-  height: 80px;
+  height: 60px;
 
   img {
     border-radius: 50%;
@@ -236,7 +235,7 @@ const IconButton = styled.div`
 const UserChat = styled.div`
   background-color: #111b21;
   color: white;
-  height: 547px;
+  height: 570px;
   overflow: scroll;
 
   img {

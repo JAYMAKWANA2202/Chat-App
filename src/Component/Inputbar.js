@@ -141,6 +141,10 @@ const Container = styled.div`
     background-color: #182229;
     border-radius: 8px;
     padding: 9px 12px;
+
+    ::placeholder {
+      color: #8696a0;
+    }
   }
 `;
 
