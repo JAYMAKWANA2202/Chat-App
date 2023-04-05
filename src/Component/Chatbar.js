@@ -8,6 +8,7 @@ import { ChatContext } from "../Context/ChatContext";
 import { useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../utilities/firebase";
+import BackGroundImg from "../../src/images/4.jpg";
 
 export default function Chatbar() {
   const [messages, setMessages] = useState([]);
@@ -25,7 +26,7 @@ export default function Chatbar() {
     <Container>
       <Detail>
         <UserLogo>
-          <img src={Myimg} height={40} alt="abc" />
+          <img src={Myimg} height={40} alt="" />
           <span>{data.user?.displayName}</span>
         </UserLogo>
         <Right>
@@ -85,7 +86,8 @@ const Right = styled.div`
 `;
 
 const ChatBox = styled.div`
-  height: 559px;
-  background-color: #111b21;
+  height: 547px;
+  background-color: #0b141a;
+  background-image: url(${BackGroundImg});
   overflow-y: scroll;
 `;

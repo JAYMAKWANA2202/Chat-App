@@ -8,7 +8,7 @@ import { auth } from "../utilities/firebase";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { db } from "../utilities/firebase";
-import Chat from "./Chat";
+import SidbarChatList from "./SidbarChatList";
 import {
   collection,
   query,
@@ -22,6 +22,8 @@ import {
 } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../../src/Context/AuthContext";
+import { CiMenuKebab } from "react-icons/ci";
+import BackGroundImg from "../../src/images/4.jpg";
 
 export default function Sidbar() {
   const { currentuser } = useContext(AuthContext);
@@ -101,22 +103,26 @@ export default function Sidbar() {
           <Button onClick={handelLogout} className=" w-100 ">
             Logout
           </Button>
+          {/* <label htmlFor="button">
+            <CiMenuKebab style={{ cursor: "pointer" }} />
+          </label> */}
         </IconButton>
       </Header>
+
       <Search>
         <SearchInput
           placeholder="search chat"
           onKeyDown={handelKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
-        />
+        ></SearchInput>
       </Search>
 
       <UserChat>
         {user && (
           <Chats
             className="userChat"
-            style={{ borderBottom: "1px solid gray" }}
+            style={{ borderBottom: "1px solid lightgray" }}
             onClick={handleSelect}
           >
             <img src={Myimg} height={40} alt="" />
@@ -125,7 +131,7 @@ export default function Sidbar() {
         )}
         {err && <span>User not found!</span>}
 
-        <Chat />
+        <SidbarChatList />
       </UserChat>
     </Container>
   );
@@ -133,7 +139,8 @@ export default function Sidbar() {
 
 const Container = styled.div`
   border-right: 1px solid grey;
-  width: 25%;
+  width: 30%;
+  /* background-image: url(${BackGroundImg}); */
 
   @media (max-width: 768px) {
     height: 60px;
@@ -162,12 +169,14 @@ const Container = styled.div`
 const Search = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 17px;
+  padding: 9px;
   z-index: 2;
-  background-color: #111b21;
+  /* background-color: #111b21; */
+  background-color: #fff;
   position: sticky;
   overflow: hidden;
   top: 80px;
+  height: 55px;
 `;
 
 const SearchInput = styled.input`
@@ -177,7 +186,10 @@ const SearchInput = styled.input`
   background-color: #202c33;
   color: whitesmoke;
   border-radius: 5px;
-  margin-left: 8px;
+
+  ::placeholder {
+    padding: 9px 12px;
+  }
 `;
 
 const SearchButton = styled.div`

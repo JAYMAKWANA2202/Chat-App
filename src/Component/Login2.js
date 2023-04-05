@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useState } from "react";
 import { app } from "../utilities/firebase";
 import { useNavigate } from "react-router-dom";

@@ -18,22 +18,24 @@ export default function MainMessageComponent({ message }) {
   const isOwner = message?.senderId === currentuser.uid;
 
   return (
-    <Messagess ref={ref} className={`Messagess ${isOwner ? "owner" : ""}`}>
-      <MessageInfo>
-        <img
-          src={isOwner ? Myimg : data.user.uid && Myimg}
-          alt=""
-          height={30}
-        />
-        <span style={{ marginTop: "10px" }}>
-          {format(new Date(message.date.toMillis()), "h:mm a")}
-        </span>
-      </MessageInfo>
-      <MessageContent isOwner={isOwner}>
-        {message?.img && <img src={message?.img} alt="" />}
-        <p>{message?.text}</p>
-      </MessageContent>
-    </Messagess>
+    <>
+      <Messagess ref={ref} className={`Messagess ${isOwner ? "owner" : ""}`}>
+        <MessageInfo>
+          <img
+            src={isOwner ? Myimg : data.user.uid && Myimg}
+            alt=""
+            height={30}
+          />
+          <span style={{ marginTop: "10px" }}>
+            {format(new Date(message.date.toMillis()), "h:mm a")}
+          </span>
+        </MessageInfo>
+        <MessageContent isOwner={isOwner}>
+          {message?.img && <img src={message?.img} alt="" />}
+          <p>{message?.text}</p>
+        </MessageContent>
+      </Messagess>
+    </>
   );
 }
 

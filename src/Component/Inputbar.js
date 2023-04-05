@@ -100,9 +100,11 @@ export default function Inputbar() {
       <input
         type="text"
         className="input"
-        placeholder="Type Something....."
+        placeholder="Type a message"
         onChange={(e) => setText(e.target.value)}
         value={text}
+        onKeyDown={handleKey}
+        onClick={handleSend}
       />
       <Share>
         <input
@@ -110,22 +112,19 @@ export default function Inputbar() {
           style={{ display: "none" }}
           id="file"
           onChange={(e) => setImg(e.target.files[0])}
-          onKeyDown={handleKey}
         />
         <label htmlFor="file">
           <TiAttachment
-            style={{ fontSize: "30px", color: "white", cursor: "pointer" }}
+            style={{ fontSize: "30px", color: "#8696a0", cursor: "pointer" }}
           />
         </label>
-
-        <button onClick={handleSend}>Send</button>
       </Share>
     </Container>
   );
 }
 
 const Container = styled.div`
-  height: 50px;
+  height: 60px;
   padding: 10px;
   color: black;
   background-color: #202c33;
@@ -136,10 +135,12 @@ const Container = styled.div`
     width: 100%;
     border: none;
     outline: none;
-    font-size: 18px;
+    font-size: 15px;
+    font-weight: 400;
     color: whitesmoke;
     background-color: #182229;
-    border-radius: 5px;
+    border-radius: 8px;
+    padding: 9px 12px;
   }
 `;
 

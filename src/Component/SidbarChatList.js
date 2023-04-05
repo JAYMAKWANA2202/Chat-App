@@ -5,8 +5,9 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../utilities/firebase";
 import { AuthContext } from "../Context/AuthContext";
 import { ChatContext } from "../Context/ChatContext";
+import BackGroundImg from "../../src/images/4.jpg";
 
-export default function Chat() {
+export default function SidbarChatList() {
   const [chat, setChat] = useState([]);
   const { currentuser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
@@ -43,9 +44,11 @@ export default function Chat() {
 }
 
 const Chats = styled.div`
-  padding: 10px;
+  padding: 10px 12px;
   height: 80px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid #222d34;
+  /* background-image: url(${BackGroundImg}); */
+
   cursor: pointer;
   width: 100%;
 
