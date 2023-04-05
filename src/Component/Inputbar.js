@@ -24,63 +24,75 @@ export default function Inputbar() {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
-    const timestamp = Timestamp.now();
+    if (text !== "") {
+      const timestamp = Timestamp.now();
 
-    if (img) {
-      const storageRef = ref(storage, uuid());
-      const uploadTask = await uploadBytesResumable(storageRef, img);
+      if (img) {
+        const storageRef = ref(storage, `images/${uuid()}`);
+        const uploadTask = uploadBytesResumable(storageRef, img);
 
-      uploadTask.on(
-        (error) => {
-          toast.error(error.message);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateDoc(doc(db, "chats", data.chatId), {
-              messages: arrayUnion({
-                id: uuid(),
-                text,
-                senderId: currentuser.uid,
-                date: timestamp,
-                img: downloadURL,
-              }),
-            });
-          });
-        }
-      );
-    } else {
-      await updateDoc(doc(db, "chats", data.chatId), {
-        messages: arrayUnion({
-          id: uuid(),
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            // Handle progress here if desired
+          },
+          (error) => {
+            toast.error(error.message);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(
+              async (downloadURL) => {
+                await updateDoc(doc(db, "chats", data.chatId), {
+                  messages: arrayUnion({
+                    id: uuid(),
+                    text,
+                    senderId: currentuser.uid,
+                    date: timestamp,
+                    img: downloadURL,
+                  }),
+                });
+              }
+            );
+          }
+        );
+      } else {
+        await updateDoc(doc(db, "chats", data.chatId), {
+          messages: arrayUnion({
+            id: uuid(),
+            text,
+            senderId: currentuser.uid,
+            date: timestamp,
+          }),
+        });
+      }
+
+      await updateDoc(doc(db, "userChat", currentuser.uid), {
+        [data.chatId + ".lastMessage"]: {
           text,
-          senderId: currentuser.uid,
-          date: timestamp,
-        }),
+          time: formatDistanceToNow(new Date(timestamp.toMillis()), {
+            addSuffix: true,
+          }),
+        },
+        [data.chatId + ".data"]: serverTimestamp(),
       });
+
+      await updateDoc(doc(db, "userChat", data.user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+          time: formatDistanceToNow(new Date(timestamp.toMillis()), {
+            addSuffix: true,
+          }),
+        },
+        [data.chatId + ".data"]: serverTimestamp(),
+      });
+
+      setText("");
+      setImg(null);
     }
+  };
 
-    await updateDoc(doc(db, "userChat", currentuser.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-        time: formatDistanceToNow(new Date(timestamp.toMillis()), {
-          addSuffix: true,
-        }),
-      },
-      [data.chatId + ".data"]: serverTimestamp(),
-    });
-
-    await updateDoc(doc(db, "userChat", data.user.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-        time: formatDistanceToNow(new Date(timestamp.toMillis()), {
-          addSuffix: true,
-        }),
-      },
-      [data.chatId + ".data"]: serverTimestamp(),
-    });
-
-    setText("");
-    setImg(null);
+  const handleKey = (e) => {
+    e.code === "Enter" && handleSend();
   };
 
   return (
@@ -98,6 +110,7 @@ export default function Inputbar() {
           style={{ display: "none" }}
           id="file"
           onChange={(e) => setImg(e.target.files[0])}
+          onKeyDown={handleKey}
         />
         <label htmlFor="file">
           <TiAttachment

@@ -16,11 +16,6 @@ export default function Chatbar() {
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
-      // pending :  true
-      // fulll : false
-      // reject : false
-
-      // error handeing
     });
     return () => {
       unSub();
@@ -31,7 +26,6 @@ export default function Chatbar() {
       <Detail>
         <UserLogo>
           <img src={Myimg} height={40} alt="abc" />
-
           <span>{data.user?.displayName}</span>
         </UserLogo>
         <Right>

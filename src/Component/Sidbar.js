@@ -134,7 +134,31 @@ export default function Sidbar() {
 const Container = styled.div`
   border-right: 1px solid grey;
   width: 25%;
+
+  @media (max-width: 768px) {
+    height: 60px;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      margin-left: 10px;
+      font-size: 10px;
+    }
+
+    p {
+      margin-left: 45px;
+      margin-top: -3px;
+      font-size: 9px;
+    }
+    button {
+      font-size: 9px;
+    }
+  }
 `;
+
 const Search = styled.div`
   display: flex;
   flex-direction: column;

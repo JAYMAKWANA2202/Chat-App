@@ -70,6 +70,7 @@ const Chats = styled.div`
   :hover {
     background-color: #0b141a;
   }
+
   @media (max-width: 768px) {
     height: 60px;
 
@@ -85,7 +86,8 @@ const Chats = styled.div`
 
     p {
       margin-left: 45px;
-      margin-top: -5px;
+      margin-top: -3px;
+      font-size: 9px;
     }
   }
 `;

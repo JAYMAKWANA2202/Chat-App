@@ -15,20 +15,13 @@ export default function MainMessageComponent({ message }) {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 
+  const isOwner = message?.senderId === currentuser.uid;
+
   return (
-    <Messagess
-      ref={ref}
-      className={`Messagess ${
-        message?.senderId === currentuser.uid && "owner"
-      }`}
-    >
+    <Messagess ref={ref} className={`Messagess ${isOwner ? "owner" : ""}`}>
       <MessageInfo>
         <img
-          src={
-            message?.senderId === currentuser.uid
-              ? Myimg
-              : data.user.uid && Myimg
-          }
+          src={isOwner ? Myimg : data.user.uid && Myimg}
           alt=""
           height={30}
         />
@@ -36,9 +29,9 @@ export default function MainMessageComponent({ message }) {
           {format(new Date(message.date.toMillis()), "h:mm a")}
         </span>
       </MessageInfo>
-      <MessageContent>
-        <p>{message?.text}</p>
+      <MessageContent isOwner={isOwner}>
         {message?.img && <img src={message?.img} alt="" />}
+        <p>{message?.text}</p>
       </MessageContent>
     </Messagess>
   );
@@ -62,7 +55,7 @@ const Messagess = styled.div`
     }
 
     img {
-      border-radius: 50%;
+      border-radius: 15px;
     }
   }
 `;
@@ -84,17 +77,22 @@ const MessageContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: flex-end;
+  align-items: ${(props) => (props.isOwner ? "flex-end" : "flex-start")};
+
   p {
-    background-color: #202c33;
+    background-color: ${(props) => (props.isOwner ? "#005c4b" : "#202c33")};
     color: whitesmoke;
-    border-radius: 0px 10px 10px 10px;
+    border-radius: ${(props) =>
+      props.isOwner ? "10px 0 10px 10px" : "0 10px 10px 10px"};
+    gap: 10px;
     padding: 10px 20px;
     max-width: max-content;
   }
 
   img {
-    max-width: 40%;
-    border-radius: 15px;
+    max-width: ${(props) => (props.isOwner ? "30%" : "30%")};
+    max-height: ${(props) => (props.isOwner ? "60%" : "60%")};
+    border-radius: ${(props) =>
+      props.isOwner ? "15px 0 15px 15px" : "0 15px 15px 15px"};
   }
 `;
