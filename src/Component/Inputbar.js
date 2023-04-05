@@ -24,7 +24,7 @@ export default function Inputbar() {
   const { data } = useContext(ChatContext);
 
   const handleSend = async () => {
-    if (text !== "") {
+    if (text.trim()) {
       const timestamp = Timestamp.now();
 
       if (img) {
@@ -88,6 +88,9 @@ export default function Inputbar() {
 
       setText("");
       setImg(null);
+    } else {
+      // cursor postion  start case
+      setText("");
     }
   };
 
