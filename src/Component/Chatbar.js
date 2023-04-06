@@ -6,15 +6,18 @@ import Inputbar from "./Inputbar";
 import MessagesContainer from "./MessagesContainer";
 import { ChatContext } from "../Context/ChatContext";
 import { useState } from "react";
-import { doc, onSnapshot } from "firebase/firestore";
+import { deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../utilities/firebase";
 import BackGroundImg from "../../src/images/4.jpg";
 import _ from "lodash";
 import Dropdown from "react-bootstrap/Dropdown";
+import { updateCurrentUser } from "firebase/auth";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Chatbar() {
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
+  const { CurrentUser } = useContext(AuthContext);
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
@@ -25,8 +28,18 @@ export default function Chatbar() {
     };
   }, [data.chatId]);
 
-  const handleDelete = () => {};
-
+  const handleDelete = async (uid) => {
+    await deleteDoc(doc(db, "chats", data.chatId));
+    // await deleteDoc(doc(db, "userChat", CurrentUser.uid, data.uid));
+    // const chatRef = doc(db, "chats", data.chatId);
+    // await updateDoc(chatRef, {
+    //   date: deleteField(),
+    //   id: deleteField(),
+    //   senderId: deleteField(),
+    //   text: deleteField(),
+    //   img: deleteField(),
+    // });
+  };
   return (
     <Container>
       <Detail>
@@ -34,6 +47,7 @@ export default function Chatbar() {
           <img src={Myimg} height={40} alt="" />
           <span>{_.startCase(data.user?.displayName)}</span>
         </UserLogo>
+
         <Right>
           <Dropdown className="jay" style={{ backgroundColor: "#202c33" }}>
             <Dropdown.Toggle variant="secondary">
@@ -45,6 +59,7 @@ export default function Chatbar() {
           </Dropdown>
         </Right>
       </Detail>
+
       <ChatBox>
         {messages &&
           messages?.map((m, i) => (
@@ -53,6 +68,7 @@ export default function Chatbar() {
             </React.Fragment>
           ))}
       </ChatBox>
+
       <Inputbar />
     </Container>
   );
@@ -105,6 +121,10 @@ const Right = styled.div`
       background-color: #202c33;
       border: none;
       font-size: smaller;
+    }
+    button:hover {
+      background-color: #353739;
+      border-radius: 50%;
     }
 
     .dropdown-menu {

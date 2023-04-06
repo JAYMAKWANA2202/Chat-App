@@ -26,7 +26,7 @@ export default function MainMessageComponent({ message }) {
             alt=""
             height={30}
           />
-          <span style={{ marginTop: "10px" }}>
+          <span style={{ marginTop: "10px", color: "white" }}>
             {format(new Date(message.date.toMillis()), "h:mm a")}
           </span>
         </MessageInfo>

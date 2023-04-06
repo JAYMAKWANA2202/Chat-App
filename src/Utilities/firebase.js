@@ -9,12 +9,12 @@ import { getStorage } from "firebase/storage";
 import { toast } from "react-toastify";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBGGycRDcx7VfKykBSekJDNJhNKmqpsBJM",
-  authDomain: "react-chat-app-1a6aa.firebaseapp.com",
-  projectId: "react-chat-app-1a6aa",
-  storageBucket: "react-chat-app-1a6aa.appspot.com",
-  messagingSenderId: "933385356933",
-  appId: "1:933385356933:web:23f4737e049a851b358bec",
+  apiKey: process.env.REACT_APP_APIKEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_PROJECTID,
+  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGEINGSENDERID,
+  appId: process.env.REACT_APP_MESSAGEINGSENDERID,
 };
 
 export const app = initializeApp(firebaseConfig);

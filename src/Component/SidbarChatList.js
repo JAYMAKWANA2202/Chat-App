@@ -5,7 +5,6 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../utilities/firebase";
 import { AuthContext } from "../Context/AuthContext";
 import { ChatContext } from "../Context/ChatContext";
-import BackGroundImg from "../../src/images/4.jpg";
 
 export default function SidbarChatList() {
   const [chat, setChat] = useState([]);

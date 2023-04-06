@@ -23,6 +23,8 @@ import {
 import { useContext } from "react";
 import { AuthContext } from "../../src/Context/AuthContext";
 import BackGroundImg from "../../src/images/4.jpg";
+import Dropdown from "react-bootstrap/Dropdown";
+import { FaEllipsisV } from "react-icons/fa";
 
 export default function Sidbar() {
   const { currentuser } = useContext(AuthContext);
@@ -87,6 +89,8 @@ export default function Sidbar() {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
+      setUser(null);
+      setUsername("");
     } catch (err) {}
 
     setUser(null);
@@ -99,12 +103,18 @@ export default function Sidbar() {
         <img src={Myimg1} height={30} alt="" />
         <span>{currentuser.email}</span>
         <IconButton>
-          <Button onClick={handelLogout} className=" w-100 ">
+          <Dropdown className="jay" style={{ backgroundColor: "#202c33" }}>
+            <Dropdown.Toggle variant="secondary">
+              <FaEllipsisV />
+            </Dropdown.Toggle>
+            <Dropdown.Menu variant="dark">
+              <Dropdown.Item>Upadte Profile</Dropdown.Item>
+              <Dropdown.Item onClick={handelLogout}> Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          {/* <Button onClick={handelLogout} className=" w-100 ">
             Logout
-          </Button>
-          {/* <label htmlFor="button">
-            <CiMenuKebab style={{ cursor: "pointer" }} />
-          </label> */}
+          </Button> */}
         </IconButton>
       </Header>
 
@@ -139,7 +149,6 @@ export default function Sidbar() {
 const Container = styled.div`
   border-right: 1px solid grey;
   width: 30%;
-  /* background-image: url(${BackGroundImg}); */
 
   @media (max-width: 768px) {
     height: 60px;
@@ -171,7 +180,7 @@ const Search = styled.div`
   padding: 9px;
   z-index: 2;
   background-color: #111b21;
-  position: sticky;
+  /* position: sticky; */
   overflow: hidden;
   top: 60px;
   height: 60px;
@@ -189,12 +198,6 @@ const SearchInput = styled.input`
     padding: 9px 12px;
     color: #8696a0;
   }
-`;
-
-const SearchButton = styled.div`
-  cursor: pointer;
-  margin-left: -5px;
-  margin-bottom: 4px;
 `;
 
 const Header = styled.div`
@@ -220,6 +223,37 @@ const IconButton = styled.div`
   color: #aebac1;
   font-size: 25px;
 
+  .jay {
+    .dropdown-toggle::after {
+      display: none;
+      background-color: #202c33;
+      border: none;
+      font-size: smaller;
+      /* z-index: 100; */
+    }
+
+    button {
+      background-color: #202c33;
+      border: none;
+      font-size: smaller;
+    }
+    button:hover {
+      background-color: #353739;
+      border-radius: 50%;
+    }
+
+    .dropdown-menu {
+      /* margin-right: 250px; */
+      background-color: #202c33;
+      z-index: 100;
+    }
+    .dropdown-menu:hover {
+      background-color: #0b141a;
+      z-index: 100;
+    }
+  }
+
+  /*
   Button {
     background-color: lightgray;
     color: black;
@@ -229,7 +263,7 @@ const IconButton = styled.div`
       background-color: darkgray;
       color: whitesmoke;
     }
-  }
+  } */
 `;
 
 const UserChat = styled.div`
@@ -245,8 +279,7 @@ const UserChat = styled.div`
 
 const Chats = styled.div`
   padding: 9px;
-  /* display: flex; */
-  /* margin-top: 10px; */
+
   height: 80px;
   border-bottom: 1px solid gray;
   cursor: pointer;
@@ -266,24 +299,6 @@ const Chats = styled.div`
     margin-left: 60px;
     margin-top: -7px;
     font-size: 15px;
-  }
-
-  :hover {
-    background-color: #0b141a;
-  }
-`;
-
-const ChatInfo = styled.div`
-  display: flex;
-  padding: 9px;
-  display: flex;
-  /* margin-top: 15px; */
-  border-bottom: 1px solid gray;
-  cursor: pointer;
-  color: whitesmoke;
-
-  span {
-    margin-left: 15px;
   }
 
   :hover {

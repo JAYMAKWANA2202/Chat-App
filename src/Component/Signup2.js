@@ -5,32 +5,12 @@ import Button from "react-bootstrap/esm/Button";
 import { useState, useEffect } from "react";
 import Validation2 from "../pages/Validation2";
 import { logInWithEmailAndPassword } from "../utilities/firebase";
-import {
-  uploadBytesResumable,
-  getDownloadURL,
-  ref,
-  docref,
-} from "firebase/storage";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
-import { app } from "../utilities/firebase";
-import { getFirestore } from "firebase/firestore";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login2 from "./Login2";
 
 export default function Signup() {
-  const [click, setClick] = useState(true);
   const [login, setLogin] = useState(true);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-  const storage = getStorage(app);
+
   const [values, setValues] = useState({
     displayName: "",
     email: "",
@@ -57,9 +37,6 @@ export default function Signup() {
         values.password,
         values.displayName
       );
-      // await updateProfile(auth.currentUser, {
-      //   displayName: values.displayName,
-      // });
     }
   };
 
