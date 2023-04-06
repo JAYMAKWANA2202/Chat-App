@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
-import { CiMenuKebab } from "react-icons/ci";
+import { FaEllipsisV } from "react-icons/fa";
 import Myimg from "../images/1.jpg";
 import Inputbar from "./Inputbar";
 import MessagesContainer from "./MessagesContainer";
@@ -10,6 +10,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../utilities/firebase";
 import BackGroundImg from "../../src/images/4.jpg";
 import _ from "lodash";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export default function Chatbar() {
   const [messages, setMessages] = useState([]);
@@ -23,6 +24,9 @@ export default function Chatbar() {
       unSub();
     };
   }, [data.chatId]);
+
+  const handleDelete = () => {};
+
   return (
     <Container>
       <Detail>
@@ -31,10 +35,16 @@ export default function Chatbar() {
           <span>{_.startCase(data.user?.displayName)}</span>
         </UserLogo>
         <Right>
-          <CiMenuKebab />
+          <Dropdown className="jay" style={{ backgroundColor: "#202c33" }}>
+            <Dropdown.Toggle variant="secondary">
+              <FaEllipsisV />
+            </Dropdown.Toggle>
+            <Dropdown.Menu variant="dark">
+              <Dropdown.Item onClick={handleDelete}>Delete Chat</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Right>
       </Detail>
-
       <ChatBox>
         {messages &&
           messages?.map((m, i) => (
@@ -43,7 +53,6 @@ export default function Chatbar() {
             </React.Fragment>
           ))}
       </ChatBox>
-
       <Inputbar />
     </Container>
   );
@@ -84,6 +93,27 @@ const UserLogo = styled.div`
 
 const Right = styled.div`
   cursor: pointer;
+  .jay {
+    .dropdown-toggle::after {
+      display: none;
+      background-color: #202c33;
+      border: none;
+      font-size: smaller;
+    }
+
+    button {
+      background-color: #202c33;
+      border: none;
+      font-size: smaller;
+    }
+
+    .dropdown-menu {
+      background-color: #202c33;
+    }
+    .dropdown-menu:hover {
+      background-color: #0b141a;
+    }
+  }
 `;
 
 const ChatBox = styled.div`
