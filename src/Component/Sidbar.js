@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "react-bootstrap/esm/Button";
 import Myimg from "../images/1.jpg";
 import Myimg1 from "../images/3.png";
 import { signOut } from "firebase/auth";
@@ -22,7 +21,6 @@ import {
 } from "firebase/firestore";
 import { useContext } from "react";
 import { AuthContext } from "../../src/Context/AuthContext";
-import BackGroundImg from "../../src/images/4.jpg";
 import Dropdown from "react-bootstrap/Dropdown";
 import { FaEllipsisV } from "react-icons/fa";
 
@@ -97,6 +95,8 @@ export default function Sidbar() {
     setUsername("");
   };
 
+  const handleProfile = () => {};
+
   return (
     <Container>
       <Header>
@@ -108,13 +108,12 @@ export default function Sidbar() {
               <FaEllipsisV />
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark">
-              <Dropdown.Item>Upadte Profile</Dropdown.Item>
+              <Dropdown.Item onClick={handleProfile}>
+                Upadte Profile
+              </Dropdown.Item>
               <Dropdown.Item onClick={handelLogout}> Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          {/* <Button onClick={handelLogout} className=" w-100 ">
-            Logout
-          </Button> */}
         </IconButton>
       </Header>
 
@@ -252,18 +251,6 @@ const IconButton = styled.div`
       z-index: 100;
     }
   }
-
-  /*
-  Button {
-    background-color: lightgray;
-    color: black;
-    border: none;
-
-    :hover {
-      background-color: darkgray;
-      color: whitesmoke;
-    }
-  } */
 `;
 
 const UserChat = styled.div`

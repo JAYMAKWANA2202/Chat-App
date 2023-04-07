@@ -3,7 +3,6 @@ import MainMessageComponent from "./MainMessageComponent";
 import styled from "styled-components";
 
 export default function MessagesContainer({ messages }) {
-  console.log("messages: ++++", messages);
   return (
     <Container>
       <MainMessageComponent message={messages} />
