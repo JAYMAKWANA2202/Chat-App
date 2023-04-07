@@ -23,6 +23,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../src/Context/AuthContext";
 import Dropdown from "react-bootstrap/Dropdown";
 import { FaEllipsisV } from "react-icons/fa";
+import ProfilePhoto from "./ProfilePhoto";
 
 export default function Sidbar() {
   const { currentuser } = useContext(AuthContext);
@@ -139,7 +140,8 @@ export default function Sidbar() {
         )}
         {err && <span>User not found!</span>}
 
-        <SidbarChatList />
+        {/* <SidbarChatList /> */}
+        <ProfilePhoto />
       </UserChat>
     </Container>
   );

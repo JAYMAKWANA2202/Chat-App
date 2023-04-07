@@ -28,8 +28,10 @@ export default function Chatbar() {
   }, [data.chatId]);
 
   const handleDelete = async () => {
+    console.log("handleDelete: ", handleDelete);
     await deleteDoc(doc(db, "chats", data.chatId));
-    await deleteDoc(doc(db, "userChat", CurrentUser.uid, data.uid));
+    await deleteDoc(doc(db, "userChat"));
+    setMessages([]);
   };
 
   return (
