@@ -24,12 +24,15 @@ import { AuthContext } from "../../src/Context/AuthContext";
 import Dropdown from "react-bootstrap/Dropdown";
 import { FaEllipsisV } from "react-icons/fa";
 import ProfilePhoto from "./ProfilePhoto";
+import SearchMain from "./SearchMain";
 
 export default function Sidbar() {
   const { currentuser } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(null);
+  const [click, setClick] = useState(true);
+
   const Navigate = useNavigate();
 
   const handelLogout = () => {
@@ -96,7 +99,9 @@ export default function Sidbar() {
     setUsername("");
   };
 
-  const handleProfile = () => {};
+  const handleProfile = () => {
+    setClick(false);
+  };
 
   return (
     <Container>
@@ -117,32 +122,34 @@ export default function Sidbar() {
           </Dropdown>
         </IconButton>
       </Header>
-
-      <Search>
-        <SearchInput
-          placeholder="Search or start new chat"
-          onKeyDown={handelKey}
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-        />
-      </Search>
-
-      <UserChat>
-        {user && (
-          <Chats
-            className="userChat"
-            style={{ borderBottom: "1px solid lightgray" }}
-            onClick={handleSelect}
-          >
-            <img src={Myimg} height={40} alt="" />
-            <span>{user?.displayName}</span>
-          </Chats>
-        )}
-        {err && <span>User not found!</span>}
-
-        {/* <SidbarChatList /> */}
+      {click ? (
+        <>
+          {/* <Search>
+            <SearchInput
+              placeholder="Search or start new chat"
+              onKeyDown={handelKey}
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+            />
+          </Search>
+          <UserChat>
+            {user && (
+              <Chats
+                className="userChat"
+                style={{ borderBottom: "1px solid lightgray" }}
+                onClick={handleSelect}
+              >
+                <img src={Myimg} height={40} alt="" />
+                <span>{user?.displayName}</span>
+              </Chats>
+            )}
+            {err && <span>User not found!</span>}
+          </UserChat> */}
+          <SearchMain />
+        </>
+      ) : (
         <ProfilePhoto />
-      </UserChat>
+      )}
     </Container>
   );
 }

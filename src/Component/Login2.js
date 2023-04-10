@@ -2,7 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/esm/Button";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { useState } from "react";
 import { app } from "../utilities/firebase";
 import { useNavigate } from "react-router-dom";
@@ -31,17 +35,14 @@ export default function Login2() {
       setIsLoading(false);
     }, 3500);
 
-    signInWithEmailAndPassword(
-      auth,
-      values.email,
-      values.password,
-      values.displayName
-    )
-      .then(async () => {
-        if (signInWithEmailAndPassword) {
-          navigate("/chat");
-          toast.success("welcome to chat app");
-        }
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        await updateProfile(user, {
+          displayName: values.displayName,
+        });
+        navigate("/chat");
+        toast.success("Welcome to chat app");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -51,7 +52,18 @@ export default function Login2() {
   return (
     <>
       <FormContainer>
-        <Form onSubmit={handleSubmit}>
+        <Form method="POST" onSubmit={handleSubmit}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label className="my-2 ">Name:</Form.Label>
+            <Form.Control
+              type="text"
+              name="displayName"
+              onChange={handleChange}
+              placeholder="Enter Name"
+              value={values.displayName}
+              autoComplete="off"
+            />
+          </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label className="my-2 lable ">Email Address:</Form.Label>
             <Form.Control

@@ -11,12 +11,10 @@ import { db } from "../utilities/firebase";
 import BackGroundImg from "../../src/images/4.jpg";
 import _ from "lodash";
 import Dropdown from "react-bootstrap/Dropdown";
-import { AuthContext } from "../Context/AuthContext";
 
 export default function Chatbar() {
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
-  const { CurrentUser } = useContext(AuthContext);
 
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
