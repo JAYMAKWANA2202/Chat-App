@@ -16,6 +16,7 @@ import { AuthContext } from "../Context/AuthContext";
 import Myimg from "../images/1.jpg";
 
 import { useNavigate } from "react-router-dom";
+import SidbarChatList from "./SidbarChatList";
 
 export default function SearchMain() {
   const { currentuser } = useContext(AuthContext);
@@ -27,19 +28,21 @@ export default function SearchMain() {
   const Navigate = useNavigate();
 
   const handelSearch = async () => {
-    const q = query(
-      collection(db, "user"),
-      where("displayName", "==", username)
-    );
-    try {
-      const querySnapshot = await getDocs(q);
-      console.log("querySnapshot: ", querySnapshot);
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
-        console.log("setUser: ", setUser);
-      });
-    } catch (err) {
-      setErr("user not found!");
+    if (currentuser !== user) {
+      const q = query(
+        collection(db, "user"),
+        where("displayName", "==", username)
+      );
+      try {
+        const querySnapshot = await getDocs(q);
+        console.log("querySnapshot: ", querySnapshot);
+        querySnapshot.forEach((doc) => {
+          setUser(doc.data());
+          console.log("setUser: ", setUser);
+        });
+      } catch (err) {
+        setErr("user not found!");
+      }
     }
   };
 
@@ -106,6 +109,7 @@ export default function SearchMain() {
           </Chats>
         )}
         {err && <span>User not found!</span>}
+        <SidbarChatList />
       </UserChat>
     </>
   );

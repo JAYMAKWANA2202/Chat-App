@@ -61,7 +61,7 @@ export default function Signup() {
         <FormContainer>
           <Form method="POST" onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label className="my-2 ">Name:</Form.Label>
+              <Form.Label className="my-2 label ">Name:</Form.Label>
               <Form.Control
                 type="text"
                 name="displayName"
@@ -76,7 +76,7 @@ export default function Signup() {
             </Form.Group>
 
             <Form.Group controlId="formBasicEmail">
-              <Form.Label className="my-2">Email Address:</Form.Label>
+              <Form.Label className="my-2 label">Email Address:</Form.Label>
               <Form.Control
                 type="email"
                 name="email"
@@ -89,7 +89,7 @@ export default function Signup() {
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-              <Form.Label className="my-2">Password:</Form.Label>
+              <Form.Label className="my-2 label">Password:</Form.Label>
               <Form.Control
                 type="password"
                 name="password"
@@ -132,6 +132,11 @@ const FormContainer = styled(Form)`
   display: flex;
   justify-content: center;
   font-size: small;
+
+  .label {
+    margin-right: 164px;
+    font-size: 15px;
+  }
 
   h1 {
     color: #111b21;

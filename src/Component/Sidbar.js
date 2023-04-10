@@ -24,16 +24,14 @@ import { AuthContext } from "../../src/Context/AuthContext";
 import Dropdown from "react-bootstrap/Dropdown";
 import { FaEllipsisV } from "react-icons/fa";
 import ProfilePhoto from "./ProfilePhoto";
-import SearchMain from "./SearchMain";
 
 export default function Sidbar() {
   const { currentuser } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(null);
-  const [click, setClick] = useState(true);
-
   const Navigate = useNavigate();
+  const [click, setClick] = useState(true);
 
   const handelLogout = () => {
     console.log("handelLogout: ", handelLogout);
@@ -122,9 +120,10 @@ export default function Sidbar() {
           </Dropdown>
         </IconButton>
       </Header>
+
       {click ? (
         <>
-          {/* <Search>
+          <Search>
             <SearchInput
               placeholder="Search or start new chat"
               onKeyDown={handelKey}
@@ -144,8 +143,9 @@ export default function Sidbar() {
               </Chats>
             )}
             {err && <span>User not found!</span>}
-          </UserChat> */}
-          <SearchMain />
+
+            <SidbarChatList />
+          </UserChat>
         </>
       ) : (
         <ProfilePhoto />

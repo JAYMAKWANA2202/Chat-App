@@ -7,7 +7,6 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import { BiArrowBack } from "react-icons/bi";
-import Sidbar from "./Sidbar";
 import SearchMain from "./SearchMain";
 
 export default function ProfilePhoto() {
@@ -32,9 +31,8 @@ export default function ProfilePhoto() {
       (error) => {},
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-          // await updateDoc(doc(db), {
-          //   img: downloadURL,
-          // });
+          // Store the download URL in local storage
+          // localStorage.setItem("imageUrl", downloadURL);
           setImageUrl(downloadURL);
         });
       }
@@ -46,7 +44,7 @@ export default function ProfilePhoto() {
     <>
       {click ? (
         <Container>
-          <Back className="jay">
+          <Back>
             <BiArrowBack onClick={handleBack} />
           </Back>
           <span>Profile</span>

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Signup2 from "../Signup2";
+import QRCode from "react-qr-code";
 
 export default function Lower() {
   const [click, setClick] = useState(true);
@@ -34,8 +35,14 @@ export default function Lower() {
                   <ol>
                     <li>Open WhatsApp on your phone </li>
                     <li>
-                      Tap <strong>Menu</strong> <ThreeDotsVertical />
-                      or <strong>Setting </strong> <Gear />
+                      Tap <strong>Menu</strong>
+                      <ThreeDotsVertical
+                        style={{ backgroundColor: "#fff", color: "gray  " }}
+                      />
+                      or <strong>Setting </strong>
+                      <Gear
+                        style={{ backgroundColor: "#fff", color: "gray" }}
+                      />
                       and <strong>Linked Devices</strong>
                     </li>
                     <li>
@@ -48,7 +55,22 @@ export default function Lower() {
               {click ? (
                 <Right>
                   <Code>
+                    <span
+                      className="fade-in frequency-mode-animation"
+                      styled="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(to right, red, green, blue);"
+                    >
+                      Welcome to Chat-App
+                    </span>
+                    <br />
+                    <p
+                      class="fade-in frequency-mode-animation"
+                      styled="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(to right, red, green, blue);"
+                    >
+                      For enjoy the Chat-App first create an account by clicking
+                      below button
+                    </p>
                     <Button
+                      className="fade-in frequency-mode-animation"
                       onClick={handleLogin}
                       style={{
                         width: "250px",
@@ -64,6 +86,7 @@ export default function Lower() {
                   <SideRight>
                     <Button
                       onClick={handleBack}
+                      // className="fade-in frequency-mode-animation"
                       style={{
                         width: "250px",
                         marginRight: "58px",
@@ -145,6 +168,41 @@ const Left = styled.div`
     margin-bottom: 30px;
     text-align: center;
   }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Apply the animation to the <p> tag */
+  h3 {
+    animation: fadeIn 1s ease-in-out;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, gray, #111b21);
+  }
+
+  ol {
+    animation: fadeIn 1s ease-in-out;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, gray, #111b21);
+    strong {
+      animation: fadeIn 1s ease-in-out;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-image: linear-gradient(to right, gray, #111b21);
+    }
+  }
 `;
 
 const List = styled.ul`
@@ -164,6 +222,24 @@ const Right = styled.div`
   font-size: 20px;
   width: 50%;
 
+  .fade-in {
+    animation: fadeIn 1s ease-in-out;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to bottom, gray 0%, black 100%);
+    color: gray;
+  }
+  button {
+    border: 0;
+    border-radius: 0;
+  }
+  button:hover {
+    border-bottom: 1px solid black;
+    font-weight: 600;
+    border-radius: 25px;
+  }
+
   @media screen and (max-width: 1024px) {
     width: 100%;
     margin-bottom: 30px;
@@ -175,8 +251,12 @@ const SideRight = styled.div`
   margin-right: 50px;
   margin-top: -24px;
 
-  Button {
-    /* width: 300px; */
+  .fade-in {
+    animation: fadeIn 1s ease-in-out;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, darkgray, black);
   }
 `;
 
@@ -192,11 +272,44 @@ const Code = styled.div`
   justify-content: center;
   margin-top: 70px;
 
+  span {
+    font-size: 40px;
+  }
+
   Button {
     width: 167.6px;
+    /* margin-right: 25px; */
   }
 
   svg {
     margin-bottom: 20px;
+  }
+  /* Define the animation */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Apply the animation to the <p> tag */
+  p {
+    animation: fadeIn 1s ease-in-out;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, gray, #111b21);
+  }
+
+  span {
+    animation: fadeIn 1s ease-in-out;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, gray, #111b21);
   }
 `;

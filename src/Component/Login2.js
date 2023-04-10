@@ -54,7 +54,7 @@ export default function Login2() {
       <FormContainer>
         <Form method="POST" onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label className="my-2 ">Name:</Form.Label>
+            <Form.Label className="my-2 label">Name:</Form.Label>
             <Form.Control
               type="text"
               name="displayName"
@@ -65,7 +65,7 @@ export default function Login2() {
             />
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label className="my-2 lable ">Email Address:</Form.Label>
+            <Form.Label className="my-2 label ">Email:</Form.Label>
             <Form.Control
               type="email"
               name="email"
@@ -77,7 +77,7 @@ export default function Login2() {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label className="my-2 lable">Password:</Form.Label>
+            <Form.Label className="my-2 label">Password:</Form.Label>
             <Form.Control
               type="password"
               name="password"
@@ -123,6 +123,12 @@ const FormContainer = styled(Form)`
   font-size: small;
   h1 {
     color: #111b21;
+  }
+
+  label {
+    margin-right: 175px;
+    /* margin-top: 0px; */
+    font-size: 15px;
   }
 
   @media screen and (max-width: 1024px) {
