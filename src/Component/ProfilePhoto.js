@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import MyProfile from "../../src/images/5.png";
 import { AuthContext } from "../Context/AuthContext";
@@ -8,37 +8,59 @@ import { doc, updateDoc } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import { BiArrowBack } from "react-icons/bi";
 import SearchMain from "./SearchMain";
+import { updateProfile } from "firebase/auth";
 
 export default function ProfilePhoto() {
   const [img, setImg] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
   const [click, setClick] = useState(true);
+  const [uploading, setUploading] = useState(false);
   const { currentuser } = useContext(AuthContext);
 
   const handleBack = () => {
     setClick(false);
   };
 
-  if (img) {
-    const storageRef = ref(storage, `profile/${uuid()}`);
-    const uploadTask = uploadBytesResumable(storageRef, img);
+  const handleImageUpload = () => {
+    if (img) {
+      setUploading(true);
+      const storageRef = ref(storage, `profilePhotos/${uuid()}`);
+      const uploadTask = uploadBytesResumable(storageRef, img);
 
-    uploadTask.on(
-      "state_changed",
-      () => {
-        // Handle progress here if desired
-      },
-      (error) => {},
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-          // Store the download URL in local storage
-          // localStorage.setItem("imageUrl", downloadURL);
-          setImageUrl(downloadURL);
-        });
-      }
-    );
-  } else {
-  }
+      uploadTask.on(
+        "state_changed",
+        () => {
+          // Handle progress here if desired
+        },
+        (error) => {
+          // Handle error here
+          console.error(error);
+          setUploading(false);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref)
+            .then(async (downloadURL) => {
+              console.log("downloadURL: ", downloadURL);
+
+              await updateDoc(doc(db, "user", currentuser.uid), {
+                photoURL: downloadURL,
+              });
+              setImageUrl(downloadURL);
+
+              await updateProfile(currentuser.uid, {
+                photoURL: downloadURL,
+              });
+
+              setUploading(false);
+            })
+            .catch((error) => {
+              console.error(error);
+              setUploading(false);
+            });
+        }
+      );
+    }
+  };
 
   return (
     <>
@@ -69,6 +91,12 @@ export default function ProfilePhoto() {
             <label>Your Email</label>
             <span>{currentuser?.email}</span>
           </Status>
+          {/* Call handleImageUpload only when img state is not null */}
+          {img && (
+            <button onClick={handleImageUpload} disabled={uploading}>
+              {uploading ? "Uploading..." : "Upload Image"}
+            </button>
+          )}
         </Container>
       ) : (
         <>

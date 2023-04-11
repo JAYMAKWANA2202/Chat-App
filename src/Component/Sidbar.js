@@ -24,6 +24,7 @@ import { AuthContext } from "../../src/Context/AuthContext";
 import Dropdown from "react-bootstrap/Dropdown";
 import { FaEllipsisV } from "react-icons/fa";
 import ProfilePhoto from "./ProfilePhoto";
+import { getDownloadURL } from "firebase/storage";
 
 export default function Sidbar() {
   const { currentuser } = useContext(AuthContext);
@@ -104,8 +105,8 @@ export default function Sidbar() {
   return (
     <Container>
       <Header>
-        <img src={Myimg1} height={30} alt="" />
-        <span>{currentuser.email}</span>
+        <img src={currentuser.PhotoURL || Myimg1} height={30} alt="" />
+        <span>{currentuser.displayName}</span>
         <IconButton>
           <Dropdown className="jay" style={{ backgroundColor: "#202c33" }}>
             <Dropdown.Toggle variant="secondary">
