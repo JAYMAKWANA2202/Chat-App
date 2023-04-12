@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { format } from "date-fns";
 import styled from "styled-components";
-import Myimg from "../images/1.jpg";
+import Myimg from "../images/5.png";
 import { AuthContext } from "../Context/AuthContext";
 import { ChatContext } from "../Context/ChatContext";
 import { useRef } from "react";
@@ -22,7 +22,11 @@ export default function MainMessageComponent({ message }) {
       <Messagess ref={ref} className={`Messagess ${isOwner ? "owner" : ""}`}>
         <MessageInfo>
           <img
-            src={isOwner ? Myimg : data.user.uid && Myimg}
+            src={
+              isOwner
+                ? currentuser.PhotoURL || Myimg
+                : data.user.uid && (currentuser.PhotoURL || Myimg)
+            }
             alt=""
             height={30}
           />

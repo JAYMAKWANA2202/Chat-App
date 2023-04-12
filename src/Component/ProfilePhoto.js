@@ -21,6 +21,13 @@ export default function ProfilePhoto() {
     setClick(false);
   };
 
+  useEffect(() => {
+    // Set initial value of imageUrl with photoURL from currentuser
+    if (currentuser && currentuser.photoURL) {
+      setImageUrl(currentuser.photoURL);
+    }
+  }, []);
+
   const handleImageUpload = () => {
     if (img) {
       setUploading(true);
@@ -47,7 +54,8 @@ export default function ProfilePhoto() {
               });
               setImageUrl(downloadURL);
 
-              await updateProfile(currentuser.uid, {
+              // don't use the currentuser.uid here below
+              await updateProfile(currentuser, {
                 photoURL: downloadURL,
               });
 
