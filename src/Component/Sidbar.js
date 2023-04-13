@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Myimg from "../images/1.jpg";
 import Myimg1 from "../images/3.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../utilities/firebase";
@@ -24,7 +23,6 @@ import { AuthContext } from "../../src/Context/AuthContext";
 import Dropdown from "react-bootstrap/Dropdown";
 import { FaEllipsisV } from "react-icons/fa";
 import ProfilePhoto from "./ProfilePhoto";
-import { getDownloadURL } from "firebase/storage";
 
 export default function Sidbar() {
   const { currentuser } = useContext(AuthContext);
@@ -62,37 +60,41 @@ export default function Sidbar() {
   };
 
   const handleSelect = async () => {
-    //check whether the group(chats in firestore) exists, if not create
-    const combinedId =
-      currentuser.uid > user.uid
-        ? currentuser.uid + user.uid
-        : user.uid + currentuser.uid;
-    try {
-      const res = await getDoc(doc(db, "chats", combinedId));
-      if (!res.exists()) {
-        //create a chat in chats collection
-        await setDoc(doc(db, "chats", combinedId), { messages: [] });
-        //create user chats
-        await updateDoc(doc(db, "userChat", currentuser.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: user.uid,
-            displayName: user.displayName,
-            email: user.email,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
-        await updateDoc(doc(db, "userChat", user.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: currentuser.uid,
-            displayName: currentuser.displayName,
-            email: currentuser.email,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
-      }
-      setUser(null);
-      setUsername("");
-    } catch (err) {}
+    if (currentuser.uid !== user.uid) {
+      //check whether the group(chats in firestore) exists, if not create
+      const combinedId =
+        currentuser.uid > user.uid
+          ? currentuser.uid + user.uid
+          : user.uid + currentuser.uid;
+      try {
+        const res = await getDoc(doc(db, "chats", combinedId));
+        if (!res.exists()) {
+          //create a chat in chats collection
+          await setDoc(doc(db, "chats", combinedId), { messages: [] });
+          //create user chats
+          await updateDoc(doc(db, "userChat", currentuser.uid), {
+            [combinedId + ".userInfo"]: {
+              uid: user.uid,
+              displayName: user.displayName,
+              email: user.email,
+              photoURL: user.photoURL,
+            },
+            [combinedId + ".date"]: serverTimestamp(),
+          });
+          await updateDoc(doc(db, "userChat", user.uid), {
+            [combinedId + ".userInfo"]: {
+              uid: currentuser.uid,
+              displayName: currentuser.displayName,
+              email: currentuser.email,
+              photoURL: currentuser.photoURL,
+            },
+            [combinedId + ".date"]: serverTimestamp(),
+          });
+        }
+        setUser(null);
+        setUsername("");
+      } catch (err) {}
+    }
 
     setUser(null);
     setUsername("");
@@ -105,7 +107,7 @@ export default function Sidbar() {
   return (
     <Container>
       <Header>
-        <img src={currentuser.uid.PhotoURL || Myimg1} height={30} alt="" />
+        <img src={currentuser.photoURL || Myimg1} height={40} alt="" />
         <span>{currentuser.displayName}</span>
         <IconButton>
           <Dropdown className="jay" style={{ backgroundColor: "#202c33" }}>
@@ -125,26 +127,34 @@ export default function Sidbar() {
       {click ? (
         <>
           <Search>
-            <SearchInput
+            <input
               placeholder="Search or start new chat"
               onKeyDown={handelKey}
               onChange={(e) => setUsername(e.target.value)}
               value={username}
             />
           </Search>
+          {console.log("user: ", user)}
+          {console.log("Chats: ", Chats)}
           <UserChat>
             {user && (
-              <Chats
-                className="userChat"
-                style={{ borderBottom: "1px solid lightgray" }}
-                onClick={handleSelect}
-              >
-                <img src={Myimg} height={40} alt="" />
-                <span>{user?.displayName}</span>
-              </Chats>
+              <>
+                <Chats
+                  className="userChat"
+                  style={{ borderBottom: "1px solid lightgray" }}
+                  onClick={handleSelect}
+                >
+                  <Image>
+                    <img src={user?.photoURL} height={40} width={40} alt="" />
+                    <span>{user?.displayName}</span>
+                  </Image>
+                  <ButtonContainer>
+                    <button onClick={handleSelect}>Add</button>
+                  </ButtonContainer>
+                </Chats>
+              </>
             )}
             {err && <span>User not found!</span>}
-
             <SidbarChatList />
           </UserChat>
         </>
@@ -193,21 +203,35 @@ const Search = styled.div`
   overflow: hidden;
   top: 60px;
   height: 60px;
-`;
 
-const SearchInput = styled.input`
-  outline-width: 0;
-  border: none;
-  flex: 1;
-  background-color: #202c33;
-  color: whitesmoke;
-  border-radius: 5px;
+  input {
+    outline-width: 0;
+    border: none;
+    flex: 1;
+    background-color: #202c33;
+    color: whitesmoke;
+    border-radius: 5px;
+    padding-left: 10px;
 
-  ::placeholder {
-    padding: 9px 12px;
-    color: #8696a0;
+    ::placeholder {
+      color: #8696a0;
+    }
   }
 `;
+
+// const SearchInput = styled.input`
+//   outline-width: 0;
+//   border: none;
+//   flex: 1;
+//   background-color: #202c33;
+//   color: whitesmoke;
+//   border-radius: 5px;
+
+//   ::placeholder {
+//     padding: 9px 12px;
+//     color: #8696a0;
+//   }
+// `;
 
 const Header = styled.div`
   display: flex;
@@ -224,6 +248,7 @@ const Header = styled.div`
   img {
     border-radius: 50%;
     cursor: pointer;
+    width: 10%;
   }
 `;
 
@@ -266,7 +291,7 @@ const IconButton = styled.div`
 const UserChat = styled.div`
   background-color: #111b21;
   color: white;
-  height: 570px;
+  height: 592px;
   overflow: scroll;
 
   img {
@@ -276,7 +301,8 @@ const UserChat = styled.div`
 
 const Chats = styled.div`
   padding: 9px;
-
+  display: flex;
+  justify-content: space-between;
   height: 80px;
   border-bottom: 1px solid gray;
   cursor: pointer;
@@ -302,3 +328,13 @@ const Chats = styled.div`
     background-color: #0b141a;
   }
 `;
+const ButtonContainer = styled.div`
+  button {
+    border-radius: 15px;
+    background-color: #202c33;
+    color: #fff;
+    border: none;
+    margin-top: 15px;
+  }
+`;
+const Image = styled.div``;

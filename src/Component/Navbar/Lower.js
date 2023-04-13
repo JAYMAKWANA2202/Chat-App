@@ -55,20 +55,20 @@ export default function Lower() {
               {click ? (
                 <Right>
                   <Code>
-                    <span
+                    {/* <span
                       className="fade-in frequency-mode-animation"
                       styled="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(to right, red, green, blue);"
                     >
                       Welcome to Chat-App
-                    </span>
+                    </span> */}
                     <br />
-                    <p
+                    {/* <p
                       class="fade-in frequency-mode-animation"
                       styled="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(to right, red, green, blue);"
                     >
                       For enjoy the Chat-App first create an account by clicking
                       below button
-                    </p>
+                    </p> */}
                     <Button
                       className="fade-in frequency-mode-animation"
                       onClick={handleLogin}

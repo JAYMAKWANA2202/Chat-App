@@ -14,7 +14,7 @@ export default function Chat() {
 
 const Container = styled.div`
   display: flex;
-  padding: 13px 8px;
+  /* padding: 13px 8px; */
   background-color: #081116;
   height: 100%;
 `;

@@ -144,7 +144,7 @@ const SearchInput = styled.input`
 const UserChat = styled.div`
   background-color: #111b21;
   color: white;
-  height: 570px;
+  height: 592px;
   overflow: scroll;
 
   img {

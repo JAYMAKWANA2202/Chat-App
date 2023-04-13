@@ -26,7 +26,7 @@ export default function ProfilePhoto() {
     if (currentuser && currentuser.photoURL) {
       setImageUrl(currentuser.photoURL);
     }
-  }, []);
+  }, [currentuser]);
 
   const handleImageUpload = () => {
     if (img) {
@@ -52,12 +52,13 @@ export default function ProfilePhoto() {
               await updateDoc(doc(db, "user", currentuser.uid), {
                 photoURL: downloadURL,
               });
-              setImageUrl(downloadURL);
 
               // don't use the currentuser.uid here below
               await updateProfile(currentuser, {
                 photoURL: downloadURL,
               });
+
+              setImageUrl(downloadURL);
 
               setUploading(false);
             })

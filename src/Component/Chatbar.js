@@ -28,7 +28,7 @@ export default function Chatbar() {
   const handleDelete = async () => {
     console.log("handleDelete: ", handleDelete);
     await deleteDoc(doc(db, "chats", data.chatId));
-    await deleteDoc(doc(db, "userChat"));
+    await deleteDoc(doc(db, "userChat", data.chatId));
     setMessages([]);
   };
 
@@ -36,7 +36,7 @@ export default function Chatbar() {
     <Container>
       <Detail>
         <UserLogo>
-          <img src={Myimg} height={40} alt="" />
+          <img src={data.user?.photoURL} height={40} alt="" />
           <span>{_.startCase(data.user?.displayName)}</span>
         </UserLogo>
 
@@ -96,6 +96,8 @@ const UserLogo = styled.div`
 
   img {
     border-radius: 50%;
+    height: 40px;
+    width: 40px;
   }
 `;
 
@@ -129,7 +131,7 @@ const Right = styled.div`
 `;
 
 const ChatBox = styled.div`
-  height: 570px;
+  height: 592px;
   background-color: #0b141a;
   background-image: url(${BackGroundImg});
   overflow-y: scroll;

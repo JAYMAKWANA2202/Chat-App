@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import Myimg from "../images/1.jpg";
+import Myimg from "../images/5.png";
 import styled from "styled-components";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../utilities/firebase";
@@ -44,7 +44,11 @@ export default function SidbarChatList() {
                   selectedChat === chat[1].userInfo.uid ? "#2a3942" : "",
               }}
             >
-              <img src={Myimg} height={40} alt="" />
+              <img
+                src={chat[1].userInfo?.photoURL || Myimg}
+                height={40}
+                alt=""
+              />
               <span>{chat[1].userInfo?.displayName} </span>
               <p>
                 {chat[1].lastMessage?.text
@@ -68,8 +72,8 @@ const Chats = styled.div`
 
   img {
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
   }
 
   span {

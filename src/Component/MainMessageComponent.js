@@ -24,8 +24,8 @@ export default function MainMessageComponent({ message }) {
           <img
             src={
               isOwner
-                ? currentuser.PhotoURL || Myimg
-                : data.user.uid && (currentuser.PhotoURL || Myimg)
+                ? currentuser.photoURL || Myimg
+                : data.user.uid && (data.user.photoURL || Myimg)
             }
             alt=""
             height={30}
@@ -34,6 +34,7 @@ export default function MainMessageComponent({ message }) {
             {format(new Date(message.date.toMillis()), "h:mm a")}
           </span>
         </MessageInfo>
+
         <MessageContent isOwner={isOwner}>
           {message?.img && <img src={message?.img} alt="" />}
           <p>{message?.text}</p>
@@ -61,7 +62,7 @@ const Messagess = styled.div`
     }
 
     img {
-      border-radius: 15px;
+      border-radius: 50%;
     }
   }
 `;
