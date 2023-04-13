@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { FaEllipsisV } from "react-icons/fa";
-import Myimg from "../images/1.jpg";
 import Inputbar from "./Inputbar";
 import MessagesContainer from "./MessagesContainer";
 import { ChatContext } from "../Context/ChatContext";

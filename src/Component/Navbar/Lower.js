@@ -8,15 +8,12 @@ import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Signup2 from "../Signup2";
-import QRCode from "react-qr-code";
 
 export default function Lower() {
   const [click, setClick] = useState(true);
-  const [page, setpage] = useState("menu");
 
   const handleLogin = () => {
     setClick(false);
-    setpage("login");
   };
 
   const handleBack = () => {
@@ -72,15 +69,13 @@ export default function Lower() {
                   <SideRight>
                     <Button
                       onClick={handleBack}
-                      // className="fade-in frequency-mode-animation"
                       style={{
                         width: "250px",
                         marginRight: "58px",
                       }}
                     >
-                      Sign In With Email password
+                      Back to Home Page
                     </Button>
-                    {/* {page === "signup" && <Signup2 />} */}
                     <SideLogin>
                       <Signup2 />
                     </SideLogin>
@@ -216,16 +211,15 @@ const Right = styled.div`
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    /* background-image: linear-gradient(to bottom, gray 0%, black 100%); */
     color: gray;
   }
 
   button {
-    border: 0;
-    border-radius: 0;
+    border: 1px solid #00a884;
+    border-radius: 15px;
   }
   button:hover {
-    border: 1px solid black;
+    border: 1px solid #00a884;
     font-weight: 600;
     border-radius: 25px;
     color: black;
@@ -243,12 +237,16 @@ const SideRight = styled.div`
   margin-right: 50px;
   margin-top: -24px;
 
-  .fade-in {
-    animation: fadeIn 1s ease-in-out;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    background-image: linear-gradient(to right, darkgray, black);
+  button {
+    border: 1px solid #00a884;
+    border-radius: 15px;
+  }
+  button:hover {
+    border: 1px solid #00a884;
+    font-weight: 600;
+    border-radius: 25px;
+    color: black;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   }
 `;
 

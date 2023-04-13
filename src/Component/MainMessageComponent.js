@@ -60,10 +60,6 @@ const Messagess = styled.div`
       padding: 10px 20px;
       max-width: max-content;
     }
-
-    img {
-      border-radius: 50%;
-    }
   }
 `;
 

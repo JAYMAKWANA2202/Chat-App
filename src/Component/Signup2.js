@@ -76,7 +76,7 @@ export default function Signup() {
             </Form.Group>
 
             <Form.Group controlId="formBasicEmail">
-              <Form.Label className="my-2 label">Email Address:</Form.Label>
+              <Form.Label className="my-2 label">Email:</Form.Label>
               <Form.Control
                 type="email"
                 name="email"

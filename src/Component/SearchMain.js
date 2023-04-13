@@ -13,7 +13,6 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { db } from "../utilities/firebase";
 import { AuthContext } from "../Context/AuthContext";
-import Myimg from "../images/1.jpg";
 
 import { useNavigate } from "react-router-dom";
 import SidbarChatList from "./SidbarChatList";
@@ -104,7 +103,7 @@ export default function SearchMain() {
             style={{ borderBottom: "1px solid lightgray" }}
             onClick={handleSelect}
           >
-            <img src={Myimg} height={40} alt="" />
+            <img src={user?.photoURL} height={40} alt="" />
             <span>{user?.displayName}</span>
           </Chats>
         )}

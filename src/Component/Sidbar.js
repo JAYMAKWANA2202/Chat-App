@@ -134,8 +134,7 @@ export default function Sidbar() {
               value={username}
             />
           </Search>
-          {console.log("user: ", user)}
-          {console.log("Chats: ", Chats)}
+
           <UserChat>
             {user && (
               <>
