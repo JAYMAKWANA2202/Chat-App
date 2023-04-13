@@ -13,8 +13,6 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { db } from "../utilities/firebase";
 import { AuthContext } from "../Context/AuthContext";
-
-import { useNavigate } from "react-router-dom";
 import SidbarChatList from "./SidbarChatList";
 
 export default function SearchMain() {
@@ -22,9 +20,6 @@ export default function SearchMain() {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(null);
-  const [click, setClick] = useState(true);
-
-  const Navigate = useNavigate();
 
   const handelSearch = async () => {
     if (currentuser !== user) {

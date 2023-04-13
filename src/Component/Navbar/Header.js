@@ -17,7 +17,7 @@ export default function Header() {
                   <Whatsapp size={39} color="white" />
                 </span>
               </Logo>
-              <Navbar_Brand>Chat-App</Navbar_Brand>
+              <NavbarBrand>Chat-App</NavbarBrand>
             </New>
           </Container>
         </Navbar>
@@ -32,7 +32,7 @@ const Headerpart = styled.div`
   height: 223px;
 `;
 
-const Navbar_Brand = styled.div`
+const NavbarBrand = styled.div`
   margin: 12px 0 0 0;
   color: white;
   font-size: 25px;
