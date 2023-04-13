@@ -30,10 +30,10 @@ export default function Lower() {
           <Center>
             <FormContainer>
               <Left>
-                <h3>Use WhatsApp on your computer</h3>
+                <h3>Use ChatApp on your computer</h3>
                 <List>
                   <ol>
-                    <li>Open WhatsApp on your phone </li>
+                    <li>Open ChatApp on your computer </li>
                     <li>
                       Tap <strong>Menu</strong>
                       <ThreeDotsVertical
@@ -55,20 +55,6 @@ export default function Lower() {
               {click ? (
                 <Right>
                   <Code>
-                    {/* <span
-                      className="fade-in frequency-mode-animation"
-                      styled="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(to right, red, green, blue);"
-                    >
-                      Welcome to Chat-App
-                    </span> */}
-                    <br />
-                    {/* <p
-                      class="fade-in frequency-mode-animation"
-                      styled="background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(to right, red, green, blue);"
-                    >
-                      For enjoy the Chat-App first create an account by clicking
-                      below button
-                    </p> */}
                     <Button
                       className="fade-in frequency-mode-animation"
                       onClick={handleLogin}
@@ -186,7 +172,8 @@ const Left = styled.div`
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    background-image: linear-gradient(to right, gray, #111b21);
+    /* background-image: linear-gradient(to right, gray, #111b21); */
+    color: gray;
   }
 
   ol {
@@ -194,13 +181,15 @@ const Left = styled.div`
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    background-image: linear-gradient(to right, gray, #111b21);
+    /* background-image: linear-gradient(to right, gray, #111b21); */
+    color: gray;
     strong {
       animation: fadeIn 1s ease-in-out;
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      background-image: linear-gradient(to right, gray, #111b21);
+      /* background-image: linear-gradient(to right, gray, #111b21); */
+      color: gray;
     }
   }
 `;
@@ -227,17 +216,20 @@ const Right = styled.div`
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    background-image: linear-gradient(to bottom, gray 0%, black 100%);
+    /* background-image: linear-gradient(to bottom, gray 0%, black 100%); */
     color: gray;
   }
+
   button {
     border: 0;
     border-radius: 0;
   }
   button:hover {
-    border-bottom: 1px solid black;
+    border: 1px solid black;
     font-weight: 600;
     border-radius: 25px;
+    color: black;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   }
 
   @media screen and (max-width: 1024px) {
