@@ -27,7 +27,7 @@ export default function Chatbar() {
   const handleDelete = async () => {
     console.log("handleDelete: ", handleDelete);
     await deleteDoc(doc(db, "chats", data.chatId));
-    await deleteDoc(doc(db, "userChat", data.chatId));
+    await deleteDoc(doc(db, "userChat", data.userId));
     setMessages([]);
   };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Myimg1 from "../images/3.png";
+import Myimg1 from "../images/5.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../utilities/firebase";
 import { useNavigate } from "react-router-dom";
@@ -218,20 +218,6 @@ const Search = styled.div`
   }
 `;
 
-// const SearchInput = styled.input`
-//   outline-width: 0;
-//   border: none;
-//   flex: 1;
-//   background-color: #202c33;
-//   color: whitesmoke;
-//   border-radius: 5px;
-
-//   ::placeholder {
-//     padding: 9px 12px;
-//     color: #8696a0;
-//   }
-// `;
-
 const Header = styled.div`
   display: flex;
   position: sticky;
@@ -262,7 +248,6 @@ const IconButton = styled.div`
       background-color: #202c33;
       border: none;
       font-size: smaller;
-      /* z-index: 100; */
     }
 
     button {
@@ -276,7 +261,6 @@ const IconButton = styled.div`
     }
 
     .dropdown-menu {
-      /* margin-right: 250px; */
       background-color: #202c33;
       z-index: 100;
     }
