@@ -46,14 +46,14 @@ export default function Signup() {
 
   useEffect(() => {
     if (
-      Object.keys(errors).length === 0 &&
+      Object.keys(errors)?.length === 0 &&
       values.displayName !== "" &&
       values.email !== "" &&
       values.password !== "" &&
       values.file !== ""
     ) {
     }
-  }, [errors]);
+  }, []);
 
   return (
     <>
