@@ -33,7 +33,7 @@ export const logInWithEmailAndPassword = async (
     ).then(async (res) => {
       const uid = res.user.uid;
       const ref = doc(db, "user", uid);
-      const docref = await setDoc(ref, { email, password, displayName, uid });
+      await setDoc(ref, { email, password, displayName, uid });
       await setDoc(doc(db, "userChat", uid), {});
     });
 
