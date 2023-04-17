@@ -16,7 +16,7 @@ import {
   SideRight,
   SideLogin,
   Code,
-} from "../../style/lower-styled";
+} from "../../style/lower.styled";
 
 export default function Lower() {
   const [click, setClick] = useState(true);

@@ -15,7 +15,7 @@ import { db, storage } from "../utilities/firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { toast } from "react-toastify";
-import { Container, Share } from "../style/input-styled";
+import { Container, Share } from "../style/input.styled";
 
 export default function Inputbar() {
   const [text, setText] = useState("");

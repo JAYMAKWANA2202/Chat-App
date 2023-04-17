@@ -8,7 +8,7 @@ import {
   MessageContent,
   MessageInfo,
   Messagess,
-} from "../style/MainMessageComponent-styled";
+} from "../style/MainMessageComponent.styled";
 
 export default function MainMessageComponent({ message }) {
   const { currentuser } = useContext(AuthContext);

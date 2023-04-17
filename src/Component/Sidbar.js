@@ -31,7 +31,7 @@ import {
   Chats,
   ButtonContainer,
   Image,
-} from "../style/sidbar-styled";
+} from "../style/sidbar.styled";
 
 export default function Sidbar() {
   const { currentuser } = useContext(AuthContext);

@@ -14,7 +14,7 @@ import {
   UserLogo,
   Right,
   ChatBox,
-} from "../style/chatbar-styled";
+} from "../style/chatbar.styled";
 import Myimg from "../images/5.png";
 
 export default function Chatbar() {
