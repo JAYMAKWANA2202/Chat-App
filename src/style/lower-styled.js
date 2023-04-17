@@ -27,7 +27,7 @@ export const Center = styled.h1`
   }
 `;
 
-export const { FormContainer } = styled(Form)`
+export const FormContainer = styled(Form)`
   display: flex;
   justify-content: space-between;
   height: 450px;
