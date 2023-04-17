@@ -1,108 +1,7 @@
-import React from "react";
 import styled from "styled-components";
-import Container from "react-bootstrap/esm/Container";
 import Form from "react-bootstrap/Form";
-import { Gear, ThreeDotsVertical } from "react-bootstrap-icons";
-import Button from "react-bootstrap/Button";
-import { useState } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Signup2 from "../Signup2";
-// import {
-//   Containers,
-//   Center,
-//   FormContainer,
-//   Left,
-//   List,
-//   Right,
-//   SideRight,
-//   SideLogin,
-//   Code,
-// } from "../../style/lower-styled";
 
-export default function Lower() {
-  const [click, setClick] = useState(true);
-
-  const handleLogin = () => {
-    setClick(false);
-  };
-
-  const handleBack = () => {
-    setClick(true);
-  };
-
-  return (
-    <>
-      <Containers>
-        <Container>
-          <Center>
-            <FormContainer>
-              <Left>
-                <h3>Use ChatApp on your computer</h3>
-                <List>
-                  <ol>
-                    <li>Open ChatApp on your computer </li>
-                    <li>
-                      Tap <strong>Menu</strong>
-                      <ThreeDotsVertical
-                        style={{ backgroundColor: "#fff", color: "gray  " }}
-                      />
-                      or <strong>Setting </strong>
-                      <Gear
-                        style={{ backgroundColor: "#fff", color: "gray" }}
-                      />
-                      and <strong>Linked Devices</strong>
-                    </li>
-                    <li>
-                      Tap on <strong>Link a Device</strong>
-                    </li>
-                    <li>Point your phone to this screen to capture the code</li>
-                  </ol>
-                </List>
-              </Left>
-              {click ? (
-                <Right>
-                  <Code>
-                    <Button
-                      className="fade-in frequency-mode-animation"
-                      onClick={handleLogin}
-                      style={{
-                        width: "250px",
-                        marginTop: "50px",
-                      }}
-                    >
-                      SignIn With Email password
-                    </Button>
-                  </Code>
-                </Right>
-              ) : (
-                <>
-                  <SideRight>
-                    <Button
-                      onClick={handleBack}
-                      style={{
-                        width: "250px",
-                        marginRight: "58px",
-                      }}
-                    >
-                      Back to Home Page
-                    </Button>
-                    <SideLogin>
-                      <Signup2 />
-                    </SideLogin>
-                  </SideRight>
-                </>
-              )}
-            </FormContainer>
-          </Center>
-        </Container>
-      </Containers>
-      <ToastContainer />
-    </>
-  );
-}
-
-const Containers = styled.div`
+export const Containers = styled.div`
   background-color: #111b21;
   color: white;
   font-size: 25px;
@@ -110,7 +9,7 @@ const Containers = styled.div`
   height: 495px;
 `;
 
-const Center = styled.h1`
+export const Center = styled.h1`
   text-align: center;
   color: grey;
   background-color: #ffffff;
@@ -128,7 +27,7 @@ const Center = styled.h1`
   }
 `;
 
-const FormContainer = styled(Form)`
+export const { FormContainer } = styled(Form)`
   display: flex;
   justify-content: space-between;
   height: 450px;
@@ -143,7 +42,7 @@ const FormContainer = styled(Form)`
   }
 `;
 
-const Left = styled.div`
+export const Left = styled.div`
   font-size: 20px;
   width: 50%;
   list-style: none;
@@ -200,7 +99,7 @@ const Left = styled.div`
   }
 `;
 
-const List = styled.ul`
+export const List = styled.ul`
   margin-top: 45px;
   padding: 0;
   list-style: none;
@@ -213,7 +112,7 @@ const List = styled.ul`
   }
 `;
 
-const Right = styled.div`
+export const Right = styled.div`
   font-size: 20px;
   width: 50%;
 
@@ -244,7 +143,7 @@ const Right = styled.div`
   }
 `;
 
-const SideRight = styled.div`
+export const SideRight = styled.div`
   margin-right: 50px;
   margin-top: -24px;
 
@@ -261,12 +160,12 @@ const SideRight = styled.div`
   }
 `;
 
-const SideLogin = styled.div`
+export const SideLogin = styled.div`
   margin-right: 70px;
   margin-top: 5px;
 `;
 
-const Code = styled.div`
+export const Code = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
 import MyProfile from "../../src/images/5.png";
 import { AuthContext } from "../Context/AuthContext";
 import { db, storage } from "../utilities/firebase";
@@ -9,6 +8,13 @@ import { v4 as uuid } from "uuid";
 import { BiArrowBack } from "react-icons/bi";
 import SearchMain from "./SearchMain";
 import { updateProfile } from "firebase/auth";
+import {
+  Back,
+  Container,
+  Photo,
+  Profile,
+  Status,
+} from "../style/profilephoto-styled";
 
 export default function ProfilePhoto() {
   const [img, setImg] = useState(null);
@@ -115,80 +121,3 @@ export default function ProfilePhoto() {
     </>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  span {
-    flex-direction: row;
-    color: #d9dee0;
-    font-size: 25px;
-  }
-`;
-
-const Profile = styled.div`
-  margin-bottom: 20px;
-`;
-
-const Photo = styled.div`
-  margin: 30px 0;
-
-  img {
-    width: 175px;
-    height: 175px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-
-  :hover {
-    opacity: 0.5;
-    cursor: pointer;
-  }
-`;
-
-const Back = styled.div`
-  background-color: #081116;
-  font-size: 30px;
-  margin-right: 380px;
-  cursor: pointer;
-  margin-top: 15px;
-
-  svg {
-    display: flex;
-    color: #fff;
-  }
-`;
-
-const Status = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  label {
-    color: green;
-    font-size: 19px;
-    margin-left: 20px;
-  }
-
-  span {
-    margin: 10px 20px;
-    font-size: 22px;
-    font-weight: 300;
-    color: whitesmoke;
-  }
-
-  @media (max-width: 768px) {
-    label {
-      font-size: 12px;
-      margin-left: 0;
-      text-align: center;
-    }
-
-    span {
-      margin: 10px 0;
-      font-size: 15px;
-      text-align: center;
-    }
-  }
-`;

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import styled from "styled-components";
 import { FaEllipsisV } from "react-icons/fa";
 import Inputbar from "./Inputbar";
 import MessagesContainer from "./MessagesContainer";
@@ -7,9 +6,15 @@ import { ChatContext } from "../Context/ChatContext";
 import { useState } from "react";
 import { deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db } from "../utilities/firebase";
-import BackGroundImg from "../../src/images/4.jpg";
 import _ from "lodash";
 import Dropdown from "react-bootstrap/Dropdown";
+import {
+  Container,
+  Detail,
+  UserLogo,
+  Right,
+  ChatBox,
+} from "../style/chatbar-styled";
 
 export default function Chatbar() {
   const [messages, setMessages] = useState([]);
@@ -64,74 +69,3 @@ export default function Chatbar() {
     </Container>
   );
 }
-
-const Container = styled.div`
-  background-color: #0b141a;
-  color: white;
-  width: 75%;
-`;
-
-const Detail = styled.div`
-  height: 60px;
-  background-color: #202c33;
-  display: flex;
-  align-items: center;
-  padding: 17px;
-  position: sticky;
-  top: 0px;
-  z-index: 1;
-  justify-content: space-between;
-  font-size: 27px;
-`;
-
-const UserLogo = styled.div`
-  font-size: 30px;
-  cursor: pointer;
-
-  span {
-    font-size: 20px;
-    margin-left: 5px;
-  }
-
-  img {
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-  }
-`;
-
-const Right = styled.div`
-  cursor: pointer;
-  .jay {
-    .dropdown-toggle::after {
-      display: none;
-      background-color: #202c33;
-      border: none;
-      font-size: smaller;
-    }
-
-    button {
-      background-color: #202c33;
-      border: none;
-      font-size: smaller;
-    }
-    button:hover {
-      background-color: #353739;
-      border-radius: 50%;
-    }
-
-    .dropdown-menu {
-      background-color: #202c33;
-    }
-    .dropdown-menu:hover {
-      background-color: #0b141a;
-    }
-  }
-`;
-
-const ChatBox = styled.div`
-  height: 592px;
-  background-color: #0b141a;
-  background-image: url(${BackGroundImg});
-  overflow-y: scroll;
-`;
