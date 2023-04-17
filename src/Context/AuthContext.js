@@ -5,20 +5,20 @@ import { useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
-  const [currentuser, setCurrentuser] = useState({});
+    const [currentuser, setCurrentuser] = useState({});
 
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      setCurrentuser(user);
-      console.log("user: ", user);
-    });
-    return () => {
-      unsub();
-    };
-  }, []);
-  return (
-    <AuthContext.Provider value={{ currentuser }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    useEffect(() => {
+        const unsub = onAuthStateChanged(auth, (user) => {
+            setCurrentuser(user);
+            console.log("user: ", user);
+        });
+        return () => {
+            unsub();
+        };
+    }, []);
+    return (
+        <AuthContext.Provider value={{ currentuser }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };

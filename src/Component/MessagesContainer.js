@@ -3,11 +3,11 @@ import MainMessageComponent from "./MainMessageComponent";
 import styled from "styled-components";
 
 export default function MessagesContainer({ messages }) {
-  return (
-    <Container>
-      <MainMessageComponent message={messages} />
-    </Container>
-  );
+    return (
+        <Container>
+            <MainMessageComponent message={messages} />
+        </Container>
+    );
 }
 
 const Container = styled.div`

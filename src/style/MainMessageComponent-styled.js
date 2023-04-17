@@ -42,7 +42,7 @@ export const MessageContent = styled.div`
     background-color: ${(props) => (props.isOwner ? "#005c4b" : "#202c33")};
     color: whitesmoke;
     border-radius: ${(props) =>
-      props.isOwner ? "10px 0 10px 10px" : "0 10px 10px 10px"};
+        props.isOwner ? "10px 0 10px 10px" : "0 10px 10px 10px"};
     gap: 10px;
     padding: 10px 20px;
     max-width: max-content;
@@ -52,6 +52,6 @@ export const MessageContent = styled.div`
     max-width: ${(props) => (props.isOwner ? "30%" : "30%")};
     max-height: ${(props) => (props.isOwner ? "60%" : "60%")};
     border-radius: ${(props) =>
-      props.isOwner ? "15px 0 15px 15px" : "0 15px 15px 15px"};
+        props.isOwner ? "15px 0 15px 15px" : "0 15px 15px 15px"};
   }
 `;

@@ -3,11 +3,11 @@ import "./style/App.css";
 import Router from "./utilities/Router";
 
 function App() {
-  return (
-    <>
-      <Router />
-    </>
-  );
+    return (
+        <>
+            <Router />
+        </>
+    );
 }
 
 export default App;

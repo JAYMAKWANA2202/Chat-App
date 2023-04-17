@@ -4,12 +4,12 @@ import Sidbar from "../Component/Sidbar";
 import Chatbar from "../Component/Chatbar";
 
 export default function Chat() {
-  return (
-    <Container>
-      <Sidbar />
-      <Chatbar />
-    </Container>
-  );
+    return (
+        <Container>
+            <Sidbar />
+            <Chatbar />
+        </Container>
+    );
 }
 
 const Container = styled.div`
