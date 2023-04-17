@@ -14,7 +14,7 @@ import {
   Photo,
   Profile,
   Status,
-} from "../style/profilephoto.styled";
+} from "../style/profilephoto-styled";
 
 export default function ProfilePhoto() {
   const [img, setImg] = useState(null);

@@ -6,7 +6,7 @@ import Validation2 from "../pages/Validation2";
 import { logInWithEmailAndPassword } from "../utilities/firebase";
 import "react-toastify/dist/ReactToastify.css";
 import Login2 from "./Login2";
-import { FormContainer } from "../style/login2.styled";
+import { FormContainer } from "../style/login2-styled";
 
 export default function Signup() {
   const [login, setLogin] = useState(true);

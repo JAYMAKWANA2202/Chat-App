@@ -4,7 +4,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../utilities/firebase";
 import { AuthContext } from "../Context/AuthContext";
 import { ChatContext } from "../Context/ChatContext";
-import { Chats } from "../style/sidbarChatlist.styled";
+import { Chats } from "../style/sidbarChatlist-styled";
 
 export default function SidbarChatList() {
   const [chat, setChat] = useState([]);

@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { Circles } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FormContainer } from "../style/login2.styled";
+import { FormContainer } from "../style/login2-styled";
 
 export default function Login2() {
   const [isLoading, setIsLoading] = useState(false);

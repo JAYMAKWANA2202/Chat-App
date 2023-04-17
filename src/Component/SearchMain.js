@@ -18,7 +18,7 @@ import {
   Search,
   SearchInput,
   UserChat,
-} from "../style/searchMain.styled";
+} from "../style/searchMain-styled";
 
 export default function SearchMain() {
   const { currentuser } = useContext(AuthContext);
