@@ -116,8 +116,10 @@ export default function Sidbar() {
   return (
     <Container>
       <Header>
-        <img src={currentuser.photoURL || Myimg1} height={40} alt="" />
-        <span>{currentuser.displayName}</span>
+        <Image>
+          <img src={currentuser.photoURL || Myimg1} height={40} alt="" />
+          <span>{currentuser.displayName}</span>
+        </Image>
         <IconButton>
           <Dropdown className="jay" style={{ backgroundColor: "#202c33" }}>
             <Dropdown.Toggle variant="secondary">

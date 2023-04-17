@@ -156,4 +156,12 @@ export const ButtonContainer = styled.div`
     margin-top: 15px;
   }
 `;
-export const Image = styled.div``;
+export const Image = styled.div`
+  img {
+    width: 40px;
+    height: 40px;
+  }
+  span {
+    margin-left: 10px;
+  }
+`;

@@ -15,6 +15,7 @@ import {
   Right,
   ChatBox,
 } from "../style/chatbar-styled";
+import Myimg from "../images/5.png";
 
 export default function Chatbar() {
   const [messages, setMessages] = useState([]);
@@ -40,7 +41,7 @@ export default function Chatbar() {
     <Container>
       <Detail>
         <UserLogo>
-          <img src={data.user?.photoURL} height={40} alt="" />
+          <img src={data.user?.photoURL || Myimg} height={40} alt="" />
           <span>{_.startCase(data.user?.displayName)}</span>
         </UserLogo>
 
